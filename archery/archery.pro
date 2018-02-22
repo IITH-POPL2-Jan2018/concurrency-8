@@ -24,9 +24,15 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += main.cpp \
-    myplayer1.cpp
+    myplayer1.cpp \
+    arrow.cpp
 
 HEADERS  += \
-    myplayer1.h
+    myplayer1.h \
+    arrow.h
 
 FORMS    += mainwindow.ui
+
+RESOURCES += \
+    resources.qrc \
+    rcs.qrc

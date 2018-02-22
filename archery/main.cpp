@@ -24,8 +24,13 @@ int main(int argc, char *argv[])
         // add a screen to visualize the game
 
     QGraphicsView * screen = new QGraphicsView(game);
+    screen->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    screen->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
     screen-> show();
+    screen->setFixedSize(950,700);
+    game->setSceneRect(0,0,950,700);
+    p1->setPos(0,300);
 
     return a. exec();
 }
