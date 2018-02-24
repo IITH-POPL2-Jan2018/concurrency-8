@@ -1,5 +1,6 @@
 #include <QApplication>
-#include "MyRect.h"
+#include "target.h"
+#include "myplayer1.h"
 #include <QGraphicsScene>
 #include <QGraphicsView>
 
@@ -17,21 +18,28 @@ int main(int argc, char *argv[]){
     QGraphicsScene * scene = new QGraphicsScene();
 
     // create an item to add to the scene
-    MyRect * rect = new MyRect();
-    rect->setRect(0,0,100,100); // change the rect from 0x0 (default) to 100x100 pixels
+    myplayer1 * p1 = new myplayer1();
+
+
 
     // add the item to the scene
-    scene->addItem(rect);
+    scene->addItem(p1);
 
+    target * t = new target();
+
+    scene->addItem(t);
     // make rect focusable
-    rect->setFlag(QGraphicsItem::ItemIsFocusable);
-    rect->setFocus();
+    p1->setFlag(QGraphicsItem::ItemIsFocusable);
+        p1->setFocus();
 
     // create a view to visualize the scene
     QGraphicsView * view = new QGraphicsView(scene);
 
     // show the view
     view->show();
-
+     view->setFixedSize(800,600);
+     scene->setSceneRect(0,0,800,600);
+     p1->setPos(0,200);
+     t->setPos(view->width()/2,view->height() - 60);
     return a.exec();
 }

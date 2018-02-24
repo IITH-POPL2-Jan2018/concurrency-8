@@ -25,7 +25,16 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
-    myrect.cpp
+    myrect.cpp \
+    target.cpp \
+    arrow.cpp \
+    myplayer1.cpp
 
 HEADERS += \
-    myrect.h
+    myrect.h \
+    target.h \
+    arrow.h \
+    myplayer1.h
+
+RESOURCES += \
+    resources.qrc

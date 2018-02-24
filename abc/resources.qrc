@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/images">
+        <file>arrow8.jpg</file>
+        <file>index.png</file>
+        <file>arrow.png</file>
+        <file>a1.png</file>
+        <file>Bubble.png</file>
+    </qresource>
+</RCC>
