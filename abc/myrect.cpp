@@ -1,4 +1,4 @@
-#include "MyRect.h"
+#include "myrect.h"
 #include <QKeyEvent>
 
 void MyRect::keyPressEvent(QKeyEvent *event){

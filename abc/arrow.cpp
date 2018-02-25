@@ -4,6 +4,7 @@
 #include <QGraphicsScene>
 #include <QList>
 #include "target.h"
+#include <typeinfo>
 
 arrow::arrow()
 {
