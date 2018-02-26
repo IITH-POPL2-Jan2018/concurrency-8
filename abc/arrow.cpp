@@ -17,7 +17,7 @@ arrow::arrow()
     QTimer * timer = new QTimer();
     connect(timer,SIGNAL(timeout()),this,SLOT(move()));
 
-    timer->start(80);
+    timer->start(30);
 }
 
 
