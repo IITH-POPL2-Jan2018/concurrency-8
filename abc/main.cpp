@@ -4,13 +4,6 @@
 #include <QGraphicsScene>
 #include <QGraphicsView>
 
-/*
-Tutorial Topics:
--events (keyPressEvent() and QKeyEvent)
--event propogation system
--QDebug
-*/
-
 int main(int argc, char *argv[]){
     QApplication a(argc, argv);
 
@@ -19,8 +12,6 @@ int main(int argc, char *argv[]){
 
     // create an item to add to the scene
     myplayer1 * p1 = new myplayer1();
-
-
 
     // add the item to the scene
     scene->addItem(p1);
