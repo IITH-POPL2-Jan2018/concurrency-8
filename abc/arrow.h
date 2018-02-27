@@ -8,6 +8,7 @@ class arrow: public QObject,public QGraphicsPixmapItem{
     Q_OBJECT
 public:
     arrow();
+    qreal angle;
 public slots:
     void move();
 };

@@ -43,7 +43,7 @@ void myplayer1::keyPressEvent(QKeyEvent *event)
        {
            if(bow1->angle <= 30)
            {
-               bow1->setTransformOriginPoint(0,22);
+               bow1->setTransformOriginPoint(0,22.5);
                bow1->angle += 10;
                bow1->setRotation(bow1->angle);
            }
@@ -52,7 +52,7 @@ void myplayer1::keyPressEvent(QKeyEvent *event)
        {
            if(bow1->angle >= -30)
            {
-              bow1->setTransformOriginPoint(0,22);
+              bow1->setTransformOriginPoint(0,22.5);
                bow1->angle -= 10;
                bow1->setRotation(bow1->angle);
            }
@@ -62,7 +62,9 @@ void myplayer1::keyPressEvent(QKeyEvent *event)
            // create an arrow
 
             arrow * a = new arrow();
-            a->setPos(x()+100,y()+20);
+            a->angle = bow1->angle;
+            a->setRotation(a->angle);
+            a->setPos(bow1->x(),bow1->y()+10);
             scene()->addItem(a);
        }
 }

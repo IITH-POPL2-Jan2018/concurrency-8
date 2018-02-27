@@ -4,6 +4,7 @@
 #include <QTimer>
 #include <QGraphicsScene>
 #include <QList>
+#include <qmath.h>
 #include "target.h"
 #include <typeinfo>
 
@@ -44,7 +45,9 @@ void arrow::move(){
                 return;
             }
         }
-    setPos(x()+10,y());
+    double dy = 10 * qSin(qDegreesToRadians(angle));
+    double dx = 10 * qCos(qDegreesToRadians(angle));
+    setPos(x()+dx,y()+dy);
     if (pos().x() > 485)
     {
         scene()->removeItem(this);
