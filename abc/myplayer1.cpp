@@ -41,7 +41,7 @@ void myplayer1::keyPressEvent(QKeyEvent *event)
        }
        else if (event->key() == Qt::Key_Left)
        {
-           if(bow1->angle <= 30)
+           if(bow1->angle <= 20)
            {
                bow1->setTransformOriginPoint(0,22.5);
                bow1->angle += 10;
@@ -50,7 +50,7 @@ void myplayer1::keyPressEvent(QKeyEvent *event)
        }
        else if (event->key() == Qt::Key_Right)
        {
-           if(bow1->angle >= -30)
+           if(bow1->angle >= -20)
            {
               bow1->setTransformOriginPoint(0,22.5);
                bow1->angle -= 10;
