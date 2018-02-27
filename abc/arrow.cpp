@@ -8,7 +8,7 @@
 #include <typeinfo>
 
 extern score * points;
-
+extern int a;
 arrow::arrow()
 {
     QPixmap arro(":/images/a1.png");
@@ -23,8 +23,6 @@ arrow::arrow()
     timer->start(30);
 }
 
-
-
 void arrow::move(){
     // move arrow right
     QList<QGraphicsItem *> colliding_items = collidingItems();
@@ -37,6 +35,7 @@ void arrow::move(){
                 // delete them both
                 //delete colliding_items[i];
                 colliding_items[i]->setPos(400,540);
+                a=0;
                 delete this;
                 return;
             }
