@@ -5,6 +5,7 @@
 #include <QDebug>
 
 int a = 0;
+
 target::target()
 {
     QPixmap tar(":/images/bug1.png");
@@ -23,12 +24,16 @@ void target::move()
     if(a == 0){
         setPos(x(),y()-10);
         if (pos().y()  ==  0){
+            setTransformOriginPoint(20,20);
+            setRotation(180);
             a = 1;
         }
     }
     else if(a == 1){
         setPos(x(),y()+10);
         if (pos().y() + 60  ==  600){
+            setTransformOriginPoint(20,20);
+            setRotation(0);
             a = 0;
         }
     }
