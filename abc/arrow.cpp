@@ -1,4 +1,3 @@
-
 #include "arrow.h"
 #include "score.h"
 #include <QTimer>

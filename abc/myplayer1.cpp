@@ -39,7 +39,7 @@ void myplayer1::keyPressEvent(QKeyEvent *event)
            setPos(x(),y()+10);
            bow1->setPos(x()+60,y()+10);
        }
-       else if (event->key() == Qt::Key_Left)
+       else if (event->key() == Qt::Key_Right)
        {
            if(bow1->angle <= 20)
            {
@@ -48,7 +48,7 @@ void myplayer1::keyPressEvent(QKeyEvent *event)
                bow1->setRotation(bow1->angle);
            }
        }
-       else if (event->key() == Qt::Key_Right)
+       else if (event->key() == Qt::Key_Left)
        {
            if(bow1->angle >= -20)
            {
