@@ -8,7 +8,7 @@
 #include <typeinfo>
 
 extern score * points;
-extern int a;
+//extern int a;
 arrow::arrow()
 {
     QPixmap arro(":/images/a1.png");
@@ -28,14 +28,21 @@ void arrow::move(){
     QList<QGraphicsItem *> colliding_items = collidingItems();
         for (int i = 0, n = colliding_items.size(); i < n; ++i){
             if (typeid(*(colliding_items[i])) == typeid(target)){
+                target * t = dynamic_cast<target*>(colliding_items[i]);
                 // remove them both
                 //scene()->removeItem(colliding_items[i]);
                 points-> increase();
                 scene()->removeItem(this);
                 // delete them both
                 //delete colliding_items[i];
+                if(t && t->a == 1)
+                {
+                    t->a = 0;
+                    t->setRotation(0);
+                }
                 colliding_items[i]->setPos(400,540);
-                a=0;
+
+                //a=0;
                 delete this;
                 return;
             }
