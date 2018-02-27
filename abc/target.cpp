@@ -7,7 +7,7 @@
 int a = 0;
 target::target()
 {
-    QPixmap tar(":/images/Bubble.png");
+    QPixmap tar(":/images/bug1.png");
     QPixmap scaled= tar.scaled(QSize(40,40));
     setPixmap(scaled);
 

@@ -5,5 +5,11 @@
         <file>arrow.png</file>
         <file>a1.png</file>
         <file>Bubble.png</file>
+        <file>score.png</file>
+        <file>bug.png</file>
+        <file>bug1.png</file>
+        <file>target1.png</file>
+        <file>bug2.jpeg</file>
+        <file>bg.resized.jpeg</file>
     </qresource>
 </RCC>

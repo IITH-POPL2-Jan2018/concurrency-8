@@ -1,8 +1,14 @@
 #include <QApplication>
 #include "target.h"
 #include "myplayer1.h"
+#include "score.h"
+#include "scoreboard.h"
 #include <QGraphicsScene>
 #include <QGraphicsView>
+#include <QGraphicsPixmapItem>
+#include <QBrush>
+#include <QImage>
+score * points ;
 
 int main(int argc, char *argv[]){
     QApplication a(argc, argv);
@@ -21,16 +27,22 @@ int main(int argc, char *argv[]){
     scene->addItem(t);
     // make rect focusable
     p1->setFlag(QGraphicsItem::ItemIsFocusable);
-        p1->setFocus();
+    p1->setFocus();
+    scoreboard * s =new scoreboard();
+    scene->addItem(s);
+    points = new score();
+    scene->addItem(points);
 
     // create a view to visualize the scene
     QGraphicsView * view = new QGraphicsView(scene);
 
     // show the view
     view->show();
-     view->setFixedSize(800,600);
-     scene->setSceneRect(0,0,800,600);
-     p1->setPos(0,200);
-     t->setPos(view->width()/2,view->height() - 60);
+    view->setFixedSize(800,600);
+    scene->setSceneRect(0,0,800,600);
+    scene->setBackgroundBrush(QBrush(QImage(":/images/bg.resized.jpeg")));
+    p1->setPos(0,200);
+    s->setPos(200,0);
+    t->setPos(view->width()/2,view->height() - 60);
     return a.exec();
 }
