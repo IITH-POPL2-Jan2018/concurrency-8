@@ -15,12 +15,12 @@ void myplayer1::keyPressEvent(QKeyEvent *event)
 
        if (event->key() == Qt::Key_Up)
        {
-           if (pos().y() > 0)
+           if (pos().y() > 30)
             setPos(x(),y()-10);
        }
        else if (event->key() == Qt::Key_Down)
        {
-           if (pos().y() < 500)
+           if (pos().y() < 470)
            setPos(x(),y()+10);
        }
        else if (event->key() == Qt::Key_Space)

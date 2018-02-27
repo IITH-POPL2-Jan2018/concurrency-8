@@ -1,10 +1,13 @@
 
 #include "arrow.h"
+#include "score.h"
 #include <QTimer>
 #include <QGraphicsScene>
 #include <QList>
 #include "target.h"
 #include <typeinfo>
+
+extern score * points;
 
 arrow::arrow()
 {
@@ -29,6 +32,7 @@ void arrow::move(){
             if (typeid(*(colliding_items[i])) == typeid(target)){
                 // remove them both
                 //scene()->removeItem(colliding_items[i]);
+                points-> increase();
                 scene()->removeItem(this);
                 // delete them both
                 //delete colliding_items[i];

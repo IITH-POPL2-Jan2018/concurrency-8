@@ -27,12 +27,16 @@ SOURCES += \
         main.cpp \
     arrow.cpp \
     myplayer1.cpp \
-    target.cpp
+    target.cpp \
+    score.cpp \
+    scoreboard.cpp
 
 HEADERS += \
     target.h \
     arrow.h \
-    myplayer1.h
+    myplayer1.h \
+    score.h \
+    scoreboard.h
 
 RESOURCES += \
     resources.qrc
