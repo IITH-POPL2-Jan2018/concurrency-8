@@ -8,7 +8,6 @@
 #include <typeinfo>
 
 extern score * points;
-//extern int a;
 arrow::arrow()
 {
     QPixmap arro(":/images/a1.png");
@@ -41,8 +40,6 @@ void arrow::move(){
                     t->setRotation(0);
                 }
                 colliding_items[i]->setPos(400,540);
-
-                //a=0;
                 delete this;
                 return;
             }
