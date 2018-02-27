@@ -12,5 +12,8 @@
         <file>bug2.jpeg</file>
         <file>bg.resized.jpeg</file>
         <file>arrow_flip.png</file>
+        <file>stickman.png</file>
+        <file>arrow2.png</file>
+        <file>bow.png</file>
     </qresource>
 </RCC>

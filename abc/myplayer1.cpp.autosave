@@ -62,6 +62,7 @@ void myplayer1::keyPressEvent(QKeyEvent *event)
            // create an arrow
 
             arrow * a = new arrow();
+            a-
             a->setPos(x()+100,y()+20);
             scene()->addItem(a);
        }

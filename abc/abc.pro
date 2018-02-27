@@ -29,14 +29,16 @@ SOURCES += \
     myplayer1.cpp \
     target.cpp \
     score.cpp \
-    scoreboard.cpp
+    scoreboard.cpp \
+    bow.cpp
 
 HEADERS += \
     target.h \
     arrow.h \
     myplayer1.h \
     score.h \
-    scoreboard.h
+    scoreboard.h \
+    bow.h
 
 RESOURCES += \
     resources.qrc

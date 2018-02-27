@@ -55,7 +55,8 @@ SOURCES       = ../abc/main.cpp \
 		../abc/myplayer1.cpp \
 		../abc/target.cpp \
 		../abc/score.cpp \
-		../abc/scoreboard.cpp qrc_resources.cpp \
+		../abc/scoreboard.cpp \
+		../abc/bow.cpp qrc_resources.cpp \
 		moc_target.cpp \
 		moc_arrow.cpp
 OBJECTS       = main.o \
@@ -64,6 +65,7 @@ OBJECTS       = main.o \
 		target.o \
 		score.o \
 		scoreboard.o \
+		bow.o \
 		qrc_resources.o \
 		moc_target.o \
 		moc_arrow.o
@@ -233,12 +235,14 @@ DIST          = ../../../Qt5.9.4/5.9.4/clang_64/mkspecs/features/spec_pre.prf \
 		../abc/arrow.h \
 		../abc/myplayer1.h \
 		../abc/score.h \
-		../abc/scoreboard.h ../abc/main.cpp \
+		../abc/scoreboard.h \
+		../abc/bow.h ../abc/main.cpp \
 		../abc/arrow.cpp \
 		../abc/myplayer1.cpp \
 		../abc/target.cpp \
 		../abc/score.cpp \
-		../abc/scoreboard.cpp
+		../abc/scoreboard.cpp \
+		../abc/bow.cpp
 QMAKE_TARGET  = abc
 DESTDIR       = 
 TARGET        = abc.app/Contents/MacOS/abc
@@ -622,8 +626,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../abc/resources.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents ../../../Qt5.9.4/5.9.4/clang_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../abc/target.h ../abc/arrow.h ../abc/myplayer1.h ../abc/score.h ../abc/scoreboard.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../abc/main.cpp ../abc/arrow.cpp ../abc/myplayer1.cpp ../abc/target.cpp ../abc/score.cpp ../abc/scoreboard.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../abc/target.h ../abc/arrow.h ../abc/myplayer1.h ../abc/score.h ../abc/scoreboard.h ../abc/bow.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../abc/main.cpp ../abc/arrow.cpp ../abc/myplayer1.cpp ../abc/target.cpp ../abc/score.cpp ../abc/scoreboard.cpp ../abc/bow.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -655,8 +659,11 @@ qrc_resources.cpp: ../abc/resources.qrc \
 		../abc/bug2.jpeg \
 		../abc/bug.png \
 		../abc/target1.png \
+		../abc/stickman.png \
+		../abc/bow.png \
 		../abc/bug1.png \
 		../abc/arrow_flip.png \
+		../abc/arrow2.png \
 		../abc/arrow8.jpg \
 		../abc/index.png \
 		../abc/score.png \
@@ -717,6 +724,7 @@ main.o: ../abc/main.cpp ../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/QObject \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qobject.h \
 		../abc/myplayer1.h \
+		../abc/bow.h \
 		../abc/score.h \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/QGraphicsTextItem \
 		../abc/scoreboard.h \
@@ -749,6 +757,7 @@ arrow.o: ../abc/arrow.cpp ../abc/arrow.h \
 myplayer1.o: ../abc/myplayer1.cpp ../abc/myplayer1.h \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/QGraphicsPixmapItem \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
+		../abc/bow.h \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtGui.framework/Headers/QKeyEvent \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtGui.framework/Headers/qevent.h \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/QGraphicsScene \
@@ -785,6 +794,11 @@ scoreboard.o: ../abc/scoreboard.cpp ../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidget
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/QGraphicsPixmapItem \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/qgraphicsitem.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o scoreboard.o ../abc/scoreboard.cpp
+
+bow.o: ../abc/bow.cpp ../abc/bow.h \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/QGraphicsPixmapItem \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/qgraphicsitem.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o bow.o ../abc/bow.cpp
 
 qrc_resources.o: qrc_resources.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_resources.o qrc_resources.cpp
