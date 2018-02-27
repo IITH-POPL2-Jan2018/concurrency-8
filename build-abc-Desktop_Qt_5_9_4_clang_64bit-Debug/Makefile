@@ -656,6 +656,7 @@ qrc_resources.cpp: ../abc/resources.qrc \
 		../abc/bug.png \
 		../abc/target1.png \
 		../abc/bug1.png \
+		../abc/arrow_flip.png \
 		../abc/arrow8.jpg \
 		../abc/index.png \
 		../abc/score.png \

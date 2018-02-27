@@ -11,5 +11,6 @@
         <file>target1.png</file>
         <file>bug2.jpeg</file>
         <file>bg.resized.jpeg</file>
+        <file>arrow_flip.png</file>
     </qresource>
 </RCC>

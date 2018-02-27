@@ -10,6 +10,14 @@ myplayer1::myplayer1()
     setPixmap(scaled);
 }
 
+myplayer1::myplayer1(int i)
+{
+    QPixmap play(":/images/arrow_flip.png");
+    QPixmap scaled= play.scaled(QSize(150,100));
+    setPixmap(scaled);
+}
+
+
 void myplayer1::keyPressEvent(QKeyEvent *event)
 {
 

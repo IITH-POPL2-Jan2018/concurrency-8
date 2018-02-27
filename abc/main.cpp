@@ -18,10 +18,10 @@ int main(int argc, char *argv[]){
 
     // create an item to add to the scene
     myplayer1 * p1 = new myplayer1();
-
+    myplayer1 * p2 = new myplayer1(1);
     // add the item to the scene
     scene->addItem(p1);
-
+    scene->addItem(p2);
     target * t = new target();
 
     scene->addItem(t);
@@ -42,6 +42,7 @@ int main(int argc, char *argv[]){
     scene->setSceneRect(0,0,800,600);
     scene->setBackgroundBrush(QBrush(QImage(":/images/bg.resized.jpeg")));
     p1->setPos(0,200);
+    p2->setPos(650,200);
     s->setPos(200,0);
     t->setPos(view->width()/2,view->height() - 60);
     return a.exec();
