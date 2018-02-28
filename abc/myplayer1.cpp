@@ -1,6 +1,7 @@
 #include "myplayer1.h"
 #include <QKeyEvent>
 #include <QGraphicsScene>
+#include <qmath.h>
 #include "arrow.h"
 #include "bow.h"
 
@@ -41,19 +42,19 @@ void myplayer1::keyPressEvent(QKeyEvent *event)
        }
        else if (event->key() == Qt::Key_Right)
        {
-           if(bow1->angle <= 20)
+           if(bow1->angle <= 30)
            {
                bow1->setTransformOriginPoint(0,22.5);
-               bow1->angle += 10;
+               bow1->angle += 5;
                bow1->setRotation(bow1->angle);
            }
        }
        else if (event->key() == Qt::Key_Left)
        {
-           if(bow1->angle >= -20)
+           if(bow1->angle >= -30)
            {
               bow1->setTransformOriginPoint(0,22.5);
-               bow1->angle -= 10;
+               bow1->angle -= 5;
                bow1->setRotation(bow1->angle);
            }
        }
@@ -63,8 +64,11 @@ void myplayer1::keyPressEvent(QKeyEvent *event)
 
             arrow * a = new arrow();
             a->angle = bow1->angle;
+            a->presentAngle = bow1->angle;
             a->setRotation(a->angle);
-            a->setPos(bow1->x(),bow1->y()+10);
+            a->setPos(bow1->x()+50*qCos(qDegreesToRadians(a->angle)),bow1->y()+50*qSin(qDegreesToRadians(a->angle)) +10);
+            a->initialX = bow1->x()+50*qCos(qDegreesToRadians(a->angle));
+            a->initialY = bow1->y()+50*qSin(qDegreesToRadians(a->angle)) + 10;
             scene()->addItem(a);
        }
 }

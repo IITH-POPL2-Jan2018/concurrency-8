@@ -6,6 +6,7 @@
 #include <qmath.h>
 #include "target.h"
 #include <typeinfo>
+#include <QDebug>
 
 extern score * points;
 arrow::arrow()
@@ -19,11 +20,11 @@ arrow::arrow()
     QTimer * timer = new QTimer();
     connect(timer,SIGNAL(timeout()),this,SLOT(move()));
 
-    timer->start(100);
+    timer->start(75);
 }
 
 void arrow::move(){
-    time++;
+    time += 0.3;
     // move arrow right
     QList<QGraphicsItem *> colliding_items = collidingItems();
         for (int i = 0, n = colliding_items.size(); i < n; ++i){
@@ -45,9 +46,12 @@ void arrow::move(){
                 return;
             }
         }
-    double dy = 10 * qSin(qDegreesToRadians(angle))-(2*(1+2*time));
-    double dx = 10 * qCos(qDegreesToRadians(angle));
-    setPos(x()+dx,y()+dy);
+
+    presentAngle = qRadiansToDegrees(qAtan((75*qSin(qDegreesToRadians(-1*angle)) - 10*time)/(75*qCos(qDegreesToRadians(angle)))));
+    setRotation(-1*presentAngle);
+    double dy = 80 * qSin(qDegreesToRadians(-1*angle))*time-(5*(time*time));
+    double dx = 80 * qCos(qDegreesToRadians(angle)) * time;
+    setPos(initialX+dx,initialY-dy);
     if (pos().x() > 485)
     {
         scene()->removeItem(this);

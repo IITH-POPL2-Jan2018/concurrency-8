@@ -9,7 +9,10 @@ class arrow: public QObject,public QGraphicsPixmapItem{
 public:
     arrow();
     qreal angle;
-    int time;
+    qreal presentAngle;
+    qreal initialX;
+    qreal initialY;
+    qreal time;
 public slots:
     void move();
 };
