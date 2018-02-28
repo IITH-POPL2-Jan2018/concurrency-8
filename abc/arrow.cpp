@@ -23,7 +23,7 @@ arrow::arrow()
     QTimer * timer = new QTimer();
     connect(timer,SIGNAL(timeout()),this,SLOT(move()));
 
-    timer->start(75);
+    timer->start(55);
 }
 
 void arrow::move(){
@@ -44,6 +44,8 @@ void arrow::move(){
                     t->a = 0;
                     t->setRotation(0);
                 }
+               // int random_number = (rand() % 500)+30;
+                //colliding_items[i]->setPos(400,random_number);
                 colliding_items[i]->setPos(400,540);
                 delete this;
                 flag=0;
@@ -56,7 +58,7 @@ void arrow::move(){
     double dy = 80 * qSin(qDegreesToRadians(-1*angle))*time-(5*(time*time));
     double dx = 80 * qCos(qDegreesToRadians(angle)) * time;
     setPos(initialX+dx,initialY-dy);
-    if (pos().x() > 485)
+    if (pos().x() > 475)
     {
         scene()->removeItem(this);
         delete this;
