@@ -14,15 +14,16 @@ arrow::arrow()
     QPixmap scaled= arro.scaled(QSize(40,25));
     setPixmap(scaled);
 
-
+    time=0;
     // connect
     QTimer * timer = new QTimer();
     connect(timer,SIGNAL(timeout()),this,SLOT(move()));
 
-    timer->start(30);
+    timer->start(100);
 }
 
 void arrow::move(){
+    time++;
     // move arrow right
     QList<QGraphicsItem *> colliding_items = collidingItems();
         for (int i = 0, n = colliding_items.size(); i < n; ++i){
@@ -44,7 +45,7 @@ void arrow::move(){
                 return;
             }
         }
-    double dy = 10 * qSin(qDegreesToRadians(angle));
+    double dy = 10 * qSin(qDegreesToRadians(angle))-(2*(1+2*time));
     double dx = 10 * qCos(qDegreesToRadians(angle));
     setPos(x()+dx,y()+dy);
     if (pos().x() > 485)
