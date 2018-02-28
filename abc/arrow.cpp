@@ -5,10 +5,13 @@
 #include <QList>
 #include <qmath.h>
 #include "target.h"
+#include "myplayer1.h"
 #include <typeinfo>
 #include <QDebug>
 
 extern score * points;
+extern int flag;
+
 arrow::arrow()
 {
     QPixmap arro(":/images/a1.png");
@@ -43,6 +46,7 @@ void arrow::move(){
                 }
                 colliding_items[i]->setPos(400,540);
                 delete this;
+                flag=0;
                 return;
             }
         }
@@ -56,5 +60,6 @@ void arrow::move(){
     {
         scene()->removeItem(this);
         delete this;
+        flag=0;
     }
 }

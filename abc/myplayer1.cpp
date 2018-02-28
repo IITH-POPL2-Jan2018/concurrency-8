@@ -4,7 +4,7 @@
 #include <qmath.h>
 #include "arrow.h"
 #include "bow.h"
-
+extern int flag;
 myplayer1::myplayer1()
 {
     QPixmap play(":/images/arrow2.png");
@@ -13,7 +13,7 @@ myplayer1::myplayer1()
     bow * b = new bow();
     b->setPos(x(),y());
     bow1 = b;
-
+    flag=0;
 }
 
 myplayer1::myplayer1(int i)
@@ -58,7 +58,7 @@ void myplayer1::keyPressEvent(QKeyEvent *event)
                bow1->setRotation(bow1->angle);
            }
        }
-       else if (event->key() == Qt::Key_Space)
+       else if ((event->key() == Qt::Key_Space)&& flag==0)
        {
            // create an arrow
 
@@ -70,5 +70,6 @@ void myplayer1::keyPressEvent(QKeyEvent *event)
             a->initialX = bow1->x()+50*qCos(qDegreesToRadians(a->angle));
             a->initialY = bow1->y()+50*qSin(qDegreesToRadians(a->angle)) + 10;
             scene()->addItem(a);
+            flag=1;
        }
 }

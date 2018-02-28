@@ -9,7 +9,7 @@
 #include <QBrush>
 #include <QImage>
 score * points ;
-
+int flag;
 int main(int argc, char *argv[]){
     QApplication a(argc, argv);
 
