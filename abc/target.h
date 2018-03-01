@@ -2,12 +2,14 @@
 #define TARGET_H
 
 #include <QGraphicsPixmapItem>
+#include "gamestate.h"
 
 #include <QObject>
 class target: public QObject, public QGraphicsPixmapItem{
     Q_OBJECT
 public:
-    target();
+    gamestate * state;
+    target(gamestate * state_param);
     int a;
 public slots:
     void move();

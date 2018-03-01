@@ -6,8 +6,9 @@
 
 
 
-target::target()
+target::target(gamestate *state_param)
 {
+    state = state_param;
     QPixmap tar(":/images/bug1.png");
     QPixmap scaled= tar.scaled(QSize(40,40));
     setPixmap(scaled);
@@ -37,4 +38,6 @@ void target::move()
             a = 0;
         }
     }
+    state->TargetPosition.setX(x());
+    state->TargetPosition.setY(y());
 }

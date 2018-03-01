@@ -12,6 +12,7 @@ myplayer1::myplayer1(gamestate *state_param)
     QPixmap scaled= play.scaled(QSize(150,100));
     setPixmap(scaled);
     bow * b = new bow();
+    state->Bow1Angle = 0;
     b->setPos(x(),y());
     bow1 = b;
     flag=0;

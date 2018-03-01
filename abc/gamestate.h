@@ -4,7 +4,8 @@
 #include <QGraphicsScene>
 #include <QPointF>
 //#include "myplayer1.h"
-#include "target.h"
+//#include "target.h"
+class target;
 class myplayer1;
 class gamestate
 {

@@ -25,7 +25,7 @@ int main(int argc, char *argv[]){
     scene->addItem(p1);
     scene->addItem(p1->bow1);
     scene->addItem(p2);
-    target * t = new target();
+    target * t = new target(state);
 
     scene->addItem(t);
     // make rect focusable
