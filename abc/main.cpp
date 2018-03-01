@@ -4,7 +4,8 @@
 #include "score.h"
 #include "scoreboard.h"
 #include <QGraphicsScene>
-
+#include "gamestate.h"
+//#include <QPointF>
 #include <QGraphicsView>
 #include <QGraphicsPixmapItem>
 #include <QBrush>
@@ -16,7 +17,7 @@ int main(int argc, char *argv[]){
 
     // create a scene
     QGraphicsScene * scene = new QGraphicsScene();
-
+    gamestate * state = new gamestate(scene);
     // create an item to add to the scene
     myplayer1 * p1 = new myplayer1();
     myplayer1 * p2 = new myplayer1(1);
@@ -47,7 +48,7 @@ int main(int argc, char *argv[]){
     p1->bow1->setPos(60,210);
     p2->setPos(650,200);
     s->setPos(200,0);
-
     t->setPos(view->width()/2,view->height()-60);
+    state->StateSet(p1,p2,t);
     return a.exec();
 }

@@ -50,7 +50,7 @@ void arrow::move(){
                 //colliding_items[i]->setPos(400,random_number);
                 QTime time = QTime::currentTime();
                 qsrand((uint)time.msec());
-                colliding_items[i]->setPos(400,qrand()%600);
+                colliding_items[i]->setPos(qrand()%100+350,qrand()%600);
                 t->a = qrand()%2;
                 if(t->a == 0)
                     t->setRotation(0);

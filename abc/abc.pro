@@ -30,7 +30,8 @@ SOURCES += \
     target.cpp \
     score.cpp \
     scoreboard.cpp \
-    bow.cpp
+    bow.cpp \
+    gamestate.cpp
 
 HEADERS += \
     target.h \
@@ -38,7 +39,8 @@ HEADERS += \
     myplayer1.h \
     score.h \
     scoreboard.h \
-    bow.h
+    bow.h \
+    gamestate.h
 
 RESOURCES += \
     resources.qrc

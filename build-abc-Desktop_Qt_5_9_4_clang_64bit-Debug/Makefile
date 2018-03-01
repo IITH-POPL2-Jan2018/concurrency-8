@@ -56,7 +56,8 @@ SOURCES       = ../abc/main.cpp \
 		../abc/target.cpp \
 		../abc/score.cpp \
 		../abc/scoreboard.cpp \
-		../abc/bow.cpp qrc_resources.cpp \
+		../abc/bow.cpp \
+		../abc/gamestate.cpp qrc_resources.cpp \
 		moc_target.cpp \
 		moc_arrow.cpp
 OBJECTS       = main.o \
@@ -66,6 +67,7 @@ OBJECTS       = main.o \
 		score.o \
 		scoreboard.o \
 		bow.o \
+		gamestate.o \
 		qrc_resources.o \
 		moc_target.o \
 		moc_arrow.o
@@ -236,13 +238,15 @@ DIST          = ../../../Qt5.9.4/5.9.4/clang_64/mkspecs/features/spec_pre.prf \
 		../abc/myplayer1.h \
 		../abc/score.h \
 		../abc/scoreboard.h \
-		../abc/bow.h ../abc/main.cpp \
+		../abc/bow.h \
+		../abc/gamestate.h ../abc/main.cpp \
 		../abc/arrow.cpp \
 		../abc/myplayer1.cpp \
 		../abc/target.cpp \
 		../abc/score.cpp \
 		../abc/scoreboard.cpp \
-		../abc/bow.cpp
+		../abc/bow.cpp \
+		../abc/gamestate.cpp
 QMAKE_TARGET  = abc
 DESTDIR       = 
 TARGET        = abc.app/Contents/MacOS/abc
@@ -626,8 +630,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../abc/resources.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents ../../../Qt5.9.4/5.9.4/clang_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../abc/target.h ../abc/arrow.h ../abc/myplayer1.h ../abc/score.h ../abc/scoreboard.h ../abc/bow.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../abc/main.cpp ../abc/arrow.cpp ../abc/myplayer1.cpp ../abc/target.cpp ../abc/score.cpp ../abc/scoreboard.cpp ../abc/bow.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../abc/target.h ../abc/arrow.h ../abc/myplayer1.h ../abc/score.h ../abc/scoreboard.h ../abc/bow.h ../abc/gamestate.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../abc/main.cpp ../abc/arrow.cpp ../abc/myplayer1.cpp ../abc/target.cpp ../abc/score.cpp ../abc/scoreboard.cpp ../abc/bow.cpp ../abc/gamestate.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -747,11 +751,19 @@ arrow.o: ../abc/arrow.cpp ../abc/arrow.h \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/QGraphicsTextItem \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/QTimer \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qtimer.h \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/QGlobal.h \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/QTime \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qdatetime.h \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/QGraphicsScene \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/qgraphicsscene.h \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtGui.framework/Headers/QList \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtGui.framework/Headers/qevent.h \
-		../abc/target.h
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qmath.h \
+		../abc/target.h \
+		../abc/myplayer1.h \
+		../abc/bow.h \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/QDebug \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qdebug.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o arrow.o ../abc/arrow.cpp
 
 myplayer1.o: ../abc/myplayer1.cpp ../abc/myplayer1.h \
@@ -762,6 +774,7 @@ myplayer1.o: ../abc/myplayer1.cpp ../abc/myplayer1.h \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtGui.framework/Headers/qevent.h \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/QGraphicsScene \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/qgraphicsscene.h \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qmath.h \
 		../abc/arrow.h \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/QObject \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qobject.h
@@ -799,6 +812,9 @@ bow.o: ../abc/bow.cpp ../abc/bow.h \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/QGraphicsPixmapItem \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/qgraphicsitem.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o bow.o ../abc/bow.cpp
+
+gamestate.o: ../abc/gamestate.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o gamestate.o ../abc/gamestate.cpp
 
 qrc_resources.o: qrc_resources.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_resources.o qrc_resources.cpp
