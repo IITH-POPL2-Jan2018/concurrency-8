@@ -3,12 +3,14 @@
 
 #include <QGraphicsPixmapItem>
 #include "bow.h"
+#include "gamestate.h"
 
 class myplayer1: public QGraphicsPixmapItem
 {
 public:
     bow * bow1;
-    myplayer1();
+    gamestate * state;
+    myplayer1(gamestate * state_param);
     myplayer1(int i);
     void keyPressEvent(QKeyEvent * event);
 

@@ -3,11 +3,13 @@
 
 #include <QGraphicsPixmapItem>
 #include <QObject>
+#include "gamestate.h"
 
 class arrow: public QObject,public QGraphicsPixmapItem{
     Q_OBJECT
 public:
-    arrow();
+    gamestate * state;
+    arrow(gamestate * state_param);
     qreal angle;
     qreal presentAngle;
     qreal initialX;

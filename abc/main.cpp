@@ -19,7 +19,7 @@ int main(int argc, char *argv[]){
     QGraphicsScene * scene = new QGraphicsScene();
     gamestate * state = new gamestate(scene);
     // create an item to add to the scene
-    myplayer1 * p1 = new myplayer1();
+    myplayer1 * p1 = new myplayer1(state);
     myplayer1 * p2 = new myplayer1(1);
     // add the item to the scene
     scene->addItem(p1);

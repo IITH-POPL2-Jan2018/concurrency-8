@@ -14,8 +14,9 @@
 extern score * points;
 extern int flag;
 
-arrow::arrow()
+arrow::arrow(gamestate *state_param)
 {
+    state = state_param;
     QPixmap arro(":/images/a1.png");
     QPixmap scaled= arro.scaled(QSize(40,25));
     setPixmap(scaled);
@@ -57,6 +58,7 @@ void arrow::move(){
                 else
                     t->setRotation(180);
                 delete this;
+                state->isArrow1 = false;
                 flag=0;
                 return;
             }
@@ -64,12 +66,16 @@ void arrow::move(){
 
     presentAngle = qRadiansToDegrees(qAtan((75*qSin(qDegreesToRadians(-1*angle)) - 10*time)/(75*qCos(qDegreesToRadians(angle)))));
     setRotation(-1*presentAngle);
+    state->Arrow1Angle = -1*presentAngle;
     double dy = 80 * qSin(qDegreesToRadians(-1*angle))*time-(5*(time*time));
     double dx = 80 * qCos(qDegreesToRadians(angle)) * time;
     setPos(initialX+dx,initialY-dy);
+    state->Arrow1Position.setX(x());
+    state->Arrow1Position.setY(y());
     if (pos().x() > 475)
     {
         scene()->removeItem(this);
+        state->isArrow1 = false;
         delete this;
         flag=0;
     }
