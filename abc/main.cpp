@@ -4,6 +4,7 @@
 #include "score.h"
 #include "scoreboard.h"
 #include <QGraphicsScene>
+
 #include <QGraphicsView>
 #include <QGraphicsPixmapItem>
 #include <QBrush>
@@ -46,6 +47,7 @@ int main(int argc, char *argv[]){
     p1->bow1->setPos(60,210);
     p2->setPos(650,200);
     s->setPos(200,0);
-    t->setPos(view->width()/2,view->height() - 60);
+
+    t->setPos(view->width()/2,view->height()-60);
     return a.exec();
 }

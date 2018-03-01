@@ -1,6 +1,8 @@
 #include "arrow.h"
 #include "score.h"
 #include <QTimer>
+#include <QGlobal.h>
+#include <QTime>
 #include <QGraphicsScene>
 #include <QList>
 #include <qmath.h>
@@ -23,7 +25,7 @@ arrow::arrow()
     QTimer * timer = new QTimer();
     connect(timer,SIGNAL(timeout()),this,SLOT(move()));
 
-    timer->start(55);
+    timer->start(75);
 }
 
 void arrow::move(){
@@ -39,14 +41,21 @@ void arrow::move(){
                 scene()->removeItem(this);
                 // delete them both
                 //delete colliding_items[i];
-                if(t && t->a == 1)
+                /*if(t && t->a == 1)
                 {
                     t->a = 0;
                     t->setRotation(0);
-                }
+                }*/
                // int random_number = (rand() % 500)+30;
                 //colliding_items[i]->setPos(400,random_number);
-                colliding_items[i]->setPos(400,540);
+                QTime time = QTime::currentTime();
+                qsrand((uint)time.msec());
+                colliding_items[i]->setPos(400,qrand()%600);
+                t->a = qrand()%2;
+                if(t->a == 0)
+                    t->setRotation(0);
+                else
+                    t->setRotation(180);
                 delete this;
                 flag=0;
                 return;

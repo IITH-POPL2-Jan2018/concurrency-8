@@ -23,7 +23,7 @@ void target::move()
 {
     if(a == 0){
         setPos(x(),y()-10);
-        if (pos().y()  ==  0){
+        if (pos().y()  <=  0){
             setTransformOriginPoint(20,20);
             setRotation(180);
             a = 1;
@@ -31,7 +31,7 @@ void target::move()
     }
     else if(a == 1){
         setPos(x(),y()+10);
-        if (pos().y() + 60  ==  600){
+        if (pos().y() + 60  >=  600){
             setTransformOriginPoint(20,20);
             setRotation(0);
             a = 0;
