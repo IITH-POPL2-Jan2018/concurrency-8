@@ -38,6 +38,6 @@ void target::move()
             a = 0;
         }
     }
-    state->TargetPosition.setX(x());
-    state->TargetPosition.setY(y());
+    state->TargetPosition.setX(pos().x());
+    state->TargetPosition.setY(pos().y());
 }

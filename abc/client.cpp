@@ -12,6 +12,7 @@ void client::estServerConnection(QUrl url_param)
     Server_url = url_param;
     connect(&Client_local,&QWebSocket::connected, this, &client::connectionSetup);
     Client_local.open(Server_url);
+
 }
 
 void client::connectionSetup()
