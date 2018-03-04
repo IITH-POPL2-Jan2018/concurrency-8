@@ -10,6 +10,7 @@ class arrow: public QObject,public QGraphicsPixmapItem{
 public:
     gamestate * state;
     arrow(gamestate * state_param);
+    arrow(int i);
     qreal angle;
     qreal presentAngle;
     qreal initialX;

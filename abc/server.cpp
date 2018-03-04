@@ -5,7 +5,7 @@
 #include <QJsonObject>
 #include <QJsonDocument>
 
-server::server(QGraphicsScene scene_param, quint16 port_param, gamestate *state_param):
+server::server(QGraphicsScene *scene_param, quint16 port_param, gamestate *state_param):
     port(port_param)
 {
     state = state_param;
@@ -49,6 +49,8 @@ void server::connectionSetup()
     else
     {
             QWebSocket *client_Socket = server_local->nextPendingConnection();
+            client_local = client_Socket;
+            startGame();
             QObject::connect(client_Socket, &QWebSocket::binaryMessageReceived, this, &server::processBinary,Qt::DirectConnection);
             QObject::connect(client_Socket, &QWebSocket::textMessageReceived, this, &server::processText,Qt::DirectConnection);
 

@@ -28,6 +28,8 @@ myplayer1::myplayer1(int i, gamestate *state_param)
     state->Bow1Angle = 0;
     b->setPos(x(),y());
     bow1 = b;
+    player2Arrow = new arrow(1);
+    state->isArrow2 = true;
     flag=0;
 }
 

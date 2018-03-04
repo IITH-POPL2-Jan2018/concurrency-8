@@ -13,7 +13,10 @@
 #include <QImage>
 #include <QDebug>
 #include <QJsonValue>
-
+#include "screenupdate.h"
+#include "server.h"
+#include "client.h"
+#include <QTimer>
 score * points ;
 int flag;
 int main(int argc, char *argv[]){
@@ -62,5 +65,13 @@ int main(int argc, char *argv[]){
     state->Player2Position.setY(p2->y());
     state->TargetPosition.setX(t->x());
     state->TargetPosition.setY(t->y());
+    state->Bow1Angle = 0;
+    state->Arrow1Angle =0;
+    state->Bow2Angle = 180;
+    state->Arrow1Angle = 180;
+    server * GameServer = new server(scene,1234,state);
+    GameServer->startServer();
+    screenUpdate * u = new screenUpdate(scene,state,p1,p2,t);
+    u->startUpdate();
     return a.exec();
 }

@@ -30,7 +30,7 @@ class server: public QObject{
 
    public:
 
-    server(QGraphicsScene scene_param,quint16 port_param,gamestate * state_param);
+    server(QGraphicsScene * scene_param,quint16 port_param,gamestate * state_param);
     void startServer();
     void gameLoop();
 

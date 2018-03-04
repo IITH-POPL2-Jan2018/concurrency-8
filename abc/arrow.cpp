@@ -26,7 +26,14 @@ arrow::arrow(gamestate *state_param)
     QTimer * timer = new QTimer();
     connect(timer,SIGNAL(timeout()),this,SLOT(move()));
 
-    timer->start(75);
+    timer->start(50);
+}
+
+arrow::arrow(int i)
+{
+    QPixmap arro(":/images/a1.png");
+    QPixmap scaled= arro.scaled(QSize(40,25));
+    setPixmap(scaled);
 }
 
 void arrow::move(){

@@ -34,7 +34,8 @@ SOURCES += \
     bow.cpp \
     gamestate.cpp \
     server.cpp \
-    client.cpp
+    client.cpp \
+    screenupdate.cpp
 
 HEADERS += \
     target.h \
@@ -45,7 +46,8 @@ HEADERS += \
     bow.h \
     gamestate.h \
     server.h \
-    client.h
+    client.h \
+    screenupdate.h
 
 RESOURCES += \
     resources.qrc
