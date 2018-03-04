@@ -1,10 +1,14 @@
 
 #include "server.h"
 #include <QDebug>
+#include <QTimer>
+#include <QJsonObject>
+#include <QJsonDocument>
 
-server::server(QGraphicsScene scene_param, quint16 port_param):
+server::server(QGraphicsScene scene_param, quint16 port_param, gamestate *state_param):
     port(port_param)
 {
+    state = state_param;
 
     gameStarted = false;
     server_local = new QWebSocketServer(QStringLiteral("Archery Server"),QWebSocketServer::NonSecureMode,this);
@@ -29,7 +33,7 @@ void server::startServer()
 }
 void server::startGame()
 {
-
+    client_local->sendTextMessage("Are You Ready ?");
 }
 
 void server::connectionSetup()
@@ -55,16 +59,37 @@ void server::connectionSetup()
 
 void server::gameLoop()
 {
+    gameStarted = true;
+    loop_Running = true;
+    sendGameState();
+    QTimer *timer = new QTimer();
+    connect(timer,SIGNAL(timeout()),this,SLOT(sendGameState()));
+    timer->start(50);
 
 }
 
-void server::processText()
+void server::processText(QString text)
 {
+    if(text.contains("yes"))
+    {
+        gameLoop();
+    }
+}
+
+void server::processBinary(QByteArray binary)
+{
+    QJsonDocument message_doc = QJsonDocument::fromBinaryData(binary);
+    QJsonObject message = message_doc.object();
 
 }
 
-void server::processBinary()
+void server::sendGameState()
 {
+    QJsonObject message;
+    message = state->getJsonObject();
+    QJsonDocument message_doc(message);
+    QByteArray message_byte = message_doc.toBinaryData();
+    client_local->sendBinaryMessage(message_byte);
 
 }
 

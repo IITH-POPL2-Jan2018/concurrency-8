@@ -24,14 +24,15 @@ class server: public QObject{
    private Q_SLOTS:
 
     void connectionSetup();
-    void gameLoop();
-    void processText();
-    void processBinary();
+    void processText(QString text);
+    void processBinary(QByteArray binary);
+    void sendGameState();
 
    public:
 
-    server(QGraphicsScene scene_param,quint16 port_param);
+    server(QGraphicsScene scene_param,quint16 port_param,gamestate * state_param);
     void startServer();
+    void gameLoop();
 
 };
 

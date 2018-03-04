@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_server_t {
-    QByteArrayData data[6];
-    char stringdata0[59];
+    QByteArrayData data[8];
+    char stringdata0[76];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -34,13 +34,15 @@ static const qt_meta_stringdata_server_t qt_meta_stringdata_server = {
 QT_MOC_LITERAL(0, 0, 6), // "server"
 QT_MOC_LITERAL(1, 7, 15), // "connectionSetup"
 QT_MOC_LITERAL(2, 23, 0), // ""
-QT_MOC_LITERAL(3, 24, 8), // "gameLoop"
-QT_MOC_LITERAL(4, 33, 11), // "processText"
-QT_MOC_LITERAL(5, 45, 13) // "processBinary"
+QT_MOC_LITERAL(3, 24, 11), // "processText"
+QT_MOC_LITERAL(4, 36, 4), // "text"
+QT_MOC_LITERAL(5, 41, 13), // "processBinary"
+QT_MOC_LITERAL(6, 55, 6), // "binary"
+QT_MOC_LITERAL(7, 62, 13) // "sendGameState"
 
     },
-    "server\0connectionSetup\0\0gameLoop\0"
-    "processText\0processBinary"
+    "server\0connectionSetup\0\0processText\0"
+    "text\0processBinary\0binary\0sendGameState"
 };
 #undef QT_MOC_LITERAL
 
@@ -59,14 +61,14 @@ static const uint qt_meta_data_server[] = {
 
  // slots: name, argc, parameters, tag, flags
        1,    0,   34,    2, 0x08 /* Private */,
-       3,    0,   35,    2, 0x08 /* Private */,
-       4,    0,   36,    2, 0x08 /* Private */,
-       5,    0,   37,    2, 0x08 /* Private */,
+       3,    1,   35,    2, 0x08 /* Private */,
+       5,    1,   38,    2, 0x08 /* Private */,
+       7,    0,   41,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
-    QMetaType::Void,
-    QMetaType::Void,
+    QMetaType::Void, QMetaType::QString,    4,
+    QMetaType::Void, QMetaType::QByteArray,    6,
     QMetaType::Void,
 
        0        // eod
@@ -79,13 +81,12 @@ void server::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void
         Q_UNUSED(_t)
         switch (_id) {
         case 0: _t->connectionSetup(); break;
-        case 1: _t->gameLoop(); break;
-        case 2: _t->processText(); break;
-        case 3: _t->processBinary(); break;
+        case 1: _t->processText((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 2: _t->processBinary((*reinterpret_cast< QByteArray(*)>(_a[1]))); break;
+        case 3: _t->sendGameState(); break;
         default: ;
         }
     }
-    Q_UNUSED(_a);
 }
 
 const QMetaObject server::staticMetaObject = {
