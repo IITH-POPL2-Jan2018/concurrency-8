@@ -27,6 +27,11 @@ void server::startServer()
     }
             qDebug() << "Server's connecting URL : " << server_local->serverUrl();
 }
+void server::startGame()
+{
+
+}
+
 void server::connectionSetup()
 {
             qDebug() << "Got A New Connection To Play Game";
@@ -47,4 +52,21 @@ void server::connectionSetup()
             qDebug() << "Added To server_local And Sent Response Message";
     }
 }
+
+void server::gameLoop()
+{
+
+}
+
+void server::processText()
+{
+
+}
+
+void server::processBinary()
+{
+
+}
+
+
 

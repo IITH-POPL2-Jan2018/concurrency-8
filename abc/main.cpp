@@ -8,8 +8,12 @@
 //#include <QPointF>
 #include <QGraphicsView>
 #include <QGraphicsPixmapItem>
+#include <QJsonObject>
 #include <QBrush>
 #include <QImage>
+#include <QDebug>
+#include <QJsonValue>
+
 score * points ;
 int flag;
 int main(int argc, char *argv[]){
@@ -26,7 +30,6 @@ int main(int argc, char *argv[]){
     scene->addItem(p1->bow1);
     scene->addItem(p2);
     target * t = new target(state);
-
     scene->addItem(t);
     // make rect focusable
     p1->setFlag(QGraphicsItem::ItemIsFocusable);
