@@ -70,7 +70,7 @@ void server::gameLoop()
 
 void server::processText(QString text)
 {
-    if(text.contains("yes"))
+    if(text.contains("Yes"))
     {
         gameLoop();
     }
