@@ -6,7 +6,7 @@ gamestate::gamestate(QGraphicsScene *scene)
     isArrow2 = false;
 }
 
-void gamestate::StateSet(myplayer1 *p1, myplayer1 *p2, target *t)
+/*void gamestate::StateSet(myplayer1 *p1, myplayer1 *p2, target *t)
 {
     Player1Position.setX(p1->x());
     Player1Position.setY(p1->y());
@@ -15,6 +15,6 @@ void gamestate::StateSet(myplayer1 *p1, myplayer1 *p2, target *t)
     TargetPosition.setX(t->x());
     TargetPosition.setY(t->y());
 
-}
+}*/
 
 

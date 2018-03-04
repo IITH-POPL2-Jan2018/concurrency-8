@@ -49,6 +49,12 @@ int main(int argc, char *argv[]){
     p2->setPos(650,200);
     s->setPos(200,0);
     t->setPos(view->width()/2,view->height()-60);
-    state->StateSet(p1,p2,t);
+    //state->StateSet(p1,p2,t);
+    state->Player1Position.setX(p1->x());
+    state->Player1Position.setY(p1->y());
+    state->Player2Position.setX(p2->x());
+    state->Player2Position.setY(p2->y());
+    state->TargetPosition.setX(t->x());
+    state->TargetPosition.setY(t->y());
     return a.exec();
 }

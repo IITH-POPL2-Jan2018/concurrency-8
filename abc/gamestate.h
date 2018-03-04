@@ -5,8 +5,8 @@
 #include <QPointF>
 //#include "myplayer1.h"
 //#include "target.h"
-class target;
-class myplayer1;
+//class target;
+//class myplayer1;
 class gamestate
 {
 public:
@@ -24,6 +24,6 @@ public:
     qreal Bow1Angle;
     qreal Bow2Angle;
 
-    void StateSet(myplayer1* p1 , myplayer1 * p2,target * t);
+    //void StateSet(myplayer1* p1 , myplayer1 * p2,target * t);
 };
 #endif // GAMESTATE_H
