@@ -5,6 +5,7 @@
 #-------------------------------------------------
 
 QT       += core gui
+QT       += websockets
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -31,7 +32,8 @@ SOURCES += \
     score.cpp \
     scoreboard.cpp \
     bow.cpp \
-    gamestate.cpp
+    gamestate.cpp \
+    server.cpp
 
 HEADERS += \
     target.h \
@@ -40,7 +42,8 @@ HEADERS += \
     score.h \
     scoreboard.h \
     bow.h \
-    gamestate.h
+    gamestate.h \
+    server.h
 
 RESOURCES += \
     resources.qrc
