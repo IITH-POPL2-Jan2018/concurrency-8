@@ -19,10 +19,11 @@ private :
     QWebSocket Client_local;
     QUrl Server_url;
 
-private slots:
+private Q_SLOTS:
     void connectionSetup();
     void processText(QString text);
     void processBinary(QByteArray message_bytes);
+    void sendGameState();
 };
 
 #endif // CLIENT_H

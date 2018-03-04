@@ -5,6 +5,7 @@
 class bow : public QGraphicsPixmapItem{
 public:
     bow();
+    //bow(int i);
     qreal angle;
 };
 #endif // BOW_H

@@ -18,11 +18,17 @@ myplayer1::myplayer1(gamestate *state_param)
     flag=0;
 }
 
-myplayer1::myplayer1(int i)
+myplayer1::myplayer1(int i, gamestate *state_param)
 {
-    QPixmap play(":/images/arrow_flip.png");
+    state = state_param;
+    QPixmap play(":/images/arrow2_flip.png");
     QPixmap scaled= play.scaled(QSize(150,100));
     setPixmap(scaled);
+    bow * b = new bow();
+    state->Bow1Angle = 0;
+    b->setPos(x(),y());
+    bow1 = b;
+    flag=0;
 }
 
 
@@ -79,5 +85,15 @@ void myplayer1::keyPressEvent(QKeyEvent *event)
        state->Player1Position.setX(x());
        state->Player1Position.setY(y());
        state->Bow1Angle = bow1->angle;
+       /*QJsonObject message;
+       message = state->getJsonObject();
+       QJsonDocument message_doc(message);
+       QByteArray message_byte = message_doc.toBinaryData();
+       client_local.sendBinaryMessage(message_byte);*/
 
+}
+
+void myplayer1::setClientLocal(QWebSocket * client_param)
+{
+    client_local = client_param;
 }

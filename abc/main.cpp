@@ -24,11 +24,12 @@ int main(int argc, char *argv[]){
     gamestate * state = new gamestate(scene);
     // create an item to add to the scene
     myplayer1 * p1 = new myplayer1(state);
-    myplayer1 * p2 = new myplayer1(1);
+    myplayer1 * p2 = new myplayer1(1,state);
     // add the item to the scene
     scene->addItem(p1);
     scene->addItem(p1->bow1);
     scene->addItem(p2);
+    scene->addItem(p2->bow1);
     target * t = new target(state);
     scene->addItem(t);
     // make rect focusable
@@ -50,6 +51,8 @@ int main(int argc, char *argv[]){
     p1->setPos(0,200);
     p1->bow1->setPos(60,210);
     p2->setPos(650,200);
+    p2->bow1->setPos(740,210 +45);
+    p2->bow1->setRotation(180);
     s->setPos(200,0);
     t->setPos(view->width()/2,view->height()-60);
     //state->StateSet(p1,p2,t);
