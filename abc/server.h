@@ -7,8 +7,7 @@
 #include "gamestate.h"
 
 
-class server :
-{
+class server: public QObject{
     Q_OBJECT
 
    private:
@@ -34,6 +33,6 @@ class server :
     server(QGraphicsScene scene_param,quint16 port_param);
     void startServer();
 
-}
+};
 
 #endif // SERVER_H

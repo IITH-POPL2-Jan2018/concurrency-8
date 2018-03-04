@@ -12,10 +12,10 @@ MAKEFILE      = Makefile
 
 CC            = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang
 CXX           = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++
-DEFINES       = -DQT_DEPRECATED_WARNINGS -DQT_QML_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
+DEFINES       = -DQT_DEPRECATED_WARNINGS -DQT_QML_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_WEBSOCKETS_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -g $(EXPORT_ARCH_ARGS) -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk -mmacosx-version-min=10.10 -Wall -W -fPIC $(DEFINES)
 CXXFLAGS      = -pipe -stdlib=libc++ -g -std=gnu++11 $(EXPORT_ARCH_ARGS) -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk -mmacosx-version-min=10.10 -Wall -W -fPIC $(DEFINES)
-INCPATH       = -I../abc -I. -I../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers -I../../../Qt5.9.4/5.9.4/clang_64/lib/QtGui.framework/Headers -I../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/System/Library/Frameworks/OpenGL.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/System/Library/Frameworks/AGL.framework/Headers -I../../../Qt5.9.4/5.9.4/clang_64/mkspecs/macx-clang -F/Users/irfanali/Qt5.9.4/5.9.4/clang_64/lib
+INCPATH       = -I../abc -I. -I../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers -I../../../Qt5.9.4/5.9.4/clang_64/lib/QtGui.framework/Headers -I../../../Qt5.9.4/5.9.4/clang_64/lib/QtWebSockets.framework/Headers -I../../../Qt5.9.4/5.9.4/clang_64/lib/QtNetwork.framework/Headers -I../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/System/Library/Frameworks/OpenGL.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/System/Library/Frameworks/AGL.framework/Headers -I../../../Qt5.9.4/5.9.4/clang_64/mkspecs/macx-clang -F/Users/irfanali/Qt5.9.4/5.9.4/clang_64/lib
 QMAKE         = /Users/irfanali/Qt5.9.4/5.9.4/clang_64/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -38,7 +38,7 @@ DISTNAME      = abc1.0.0
 DISTDIR = /Users/irfanali/Desktop/concurrency-8/build-abc-Desktop_Qt_5_9_4_clang_64bit-Debug/.tmp/abc1.0.0
 LINK          = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++
 LFLAGS        = -stdlib=libc++ -headerpad_max_install_names $(EXPORT_ARCH_ARGS) -Wl,-syslibroot,/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk -mmacosx-version-min=10.10 -Wl,-rpath,@executable_path/Frameworks -Wl,-rpath,/Users/irfanali/Qt5.9.4/5.9.4/clang_64/lib
-LIBS          = $(SUBLIBS) -F/Users/irfanali/Qt5.9.4/5.9.4/clang_64/lib -framework QtWidgets -framework QtGui -framework QtCore -framework DiskArbitration -framework IOKit -framework OpenGL -framework AGL 
+LIBS          = $(SUBLIBS) -F/Users/irfanali/Qt5.9.4/5.9.4/clang_64/lib -framework QtWidgets -framework QtGui -framework QtCore -framework DiskArbitration -framework IOKit -framework QtWebSockets -framework QtNetwork -framework OpenGL -framework AGL 
 AR            = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ar cq
 RANLIB        = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ranlib -s
 SED           = sed
@@ -57,9 +57,11 @@ SOURCES       = ../abc/main.cpp \
 		../abc/score.cpp \
 		../abc/scoreboard.cpp \
 		../abc/bow.cpp \
-		../abc/gamestate.cpp qrc_resources.cpp \
+		../abc/gamestate.cpp \
+		../abc/server.cpp qrc_resources.cpp \
 		moc_target.cpp \
-		moc_arrow.cpp
+		moc_arrow.cpp \
+		moc_server.cpp
 OBJECTS       = main.o \
 		arrow.o \
 		myplayer1.o \
@@ -68,9 +70,11 @@ OBJECTS       = main.o \
 		scoreboard.o \
 		bow.o \
 		gamestate.o \
+		server.o \
 		qrc_resources.o \
 		moc_target.o \
-		moc_arrow.o
+		moc_arrow.o \
+		moc_server.o
 DIST          = ../../../Qt5.9.4/5.9.4/clang_64/mkspecs/features/spec_pre.prf \
 		../../../Qt5.9.4/5.9.4/clang_64/mkspecs/qdevice.pri \
 		../../../Qt5.9.4/5.9.4/clang_64/mkspecs/features/device_config.prf \
@@ -239,14 +243,16 @@ DIST          = ../../../Qt5.9.4/5.9.4/clang_64/mkspecs/features/spec_pre.prf \
 		../abc/score.h \
 		../abc/scoreboard.h \
 		../abc/bow.h \
-		../abc/gamestate.h ../abc/main.cpp \
+		../abc/gamestate.h \
+		../abc/server.h ../abc/main.cpp \
 		../abc/arrow.cpp \
 		../abc/myplayer1.cpp \
 		../abc/target.cpp \
 		../abc/score.cpp \
 		../abc/scoreboard.cpp \
 		../abc/bow.cpp \
-		../abc/gamestate.cpp
+		../abc/gamestate.cpp \
+		../abc/server.cpp
 QMAKE_TARGET  = abc
 DESTDIR       = 
 TARGET        = abc.app/Contents/MacOS/abc
@@ -430,6 +436,8 @@ Makefile: ../abc/abc.pro ../../../Qt5.9.4/5.9.4/clang_64/mkspecs/macx-clang/qmak
 		../abc/resources.qrc \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/QtWidgets.prl \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtGui.framework/QtGui.prl \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWebSockets.framework/QtWebSockets.prl \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtNetwork.framework/QtNetwork.prl \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/QtCore.prl
 	$(QMAKE) -o Makefile ../abc/abc.pro -spec macx-clang CONFIG+=debug CONFIG+=x86_64 CONFIG+=qml_debug
 ../../../Qt5.9.4/5.9.4/clang_64/mkspecs/features/spec_pre.prf:
@@ -598,6 +606,8 @@ Makefile: ../abc/abc.pro ../../../Qt5.9.4/5.9.4/clang_64/mkspecs/macx-clang/qmak
 ../abc/resources.qrc:
 ../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/QtWidgets.prl:
 ../../../Qt5.9.4/5.9.4/clang_64/lib/QtGui.framework/QtGui.prl:
+../../../Qt5.9.4/5.9.4/clang_64/lib/QtWebSockets.framework/QtWebSockets.prl:
+../../../Qt5.9.4/5.9.4/clang_64/lib/QtNetwork.framework/QtNetwork.prl:
 ../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/QtCore.prl:
 qmake: FORCE
 	@$(QMAKE) -o Makefile ../abc/abc.pro -spec macx-clang CONFIG+=debug CONFIG+=x86_64 CONFIG+=qml_debug
@@ -630,8 +640,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../abc/resources.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents ../../../Qt5.9.4/5.9.4/clang_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../abc/target.h ../abc/arrow.h ../abc/myplayer1.h ../abc/score.h ../abc/scoreboard.h ../abc/bow.h ../abc/gamestate.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../abc/main.cpp ../abc/arrow.cpp ../abc/myplayer1.cpp ../abc/target.cpp ../abc/score.cpp ../abc/scoreboard.cpp ../abc/bow.cpp ../abc/gamestate.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../abc/target.h ../abc/arrow.h ../abc/myplayer1.h ../abc/score.h ../abc/scoreboard.h ../abc/bow.h ../abc/gamestate.h ../abc/server.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../abc/main.cpp ../abc/arrow.cpp ../abc/myplayer1.cpp ../abc/target.cpp ../abc/score.cpp ../abc/scoreboard.cpp ../abc/bow.cpp ../abc/gamestate.cpp ../abc/server.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -683,26 +693,52 @@ compiler_moc_predefs_clean:
 moc_predefs.h: ../../../Qt5.9.4/5.9.4/clang_64/mkspecs/features/data/dummy.cpp
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ -pipe -stdlib=libc++ -g -std=gnu++11 $(EXPORT_ARCH_ARGS) -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk -mmacosx-version-min=10.10 -Wall -W -dM -E -o moc_predefs.h ../../../Qt5.9.4/5.9.4/clang_64/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_target.cpp moc_arrow.cpp
+compiler_moc_header_make_all: moc_target.cpp moc_arrow.cpp moc_server.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_target.cpp moc_arrow.cpp
+	-$(DEL_FILE) moc_target.cpp moc_arrow.cpp moc_server.cpp
 moc_target.cpp: ../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/QGraphicsPixmapItem \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
+		../abc/gamestate.h \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/QGraphicsScene \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/qgraphicsscene.h \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/QPointF \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qpoint.h \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/QObject \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qobject.h \
 		../abc/target.h \
 		moc_predefs.h \
 		../../../Qt5.9.4/5.9.4/clang_64/bin/moc
-	/Users/irfanali/Qt5.9.4/5.9.4/clang_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/Users/irfanali/Qt5.9.4/5.9.4/clang_64/mkspecs/macx-clang -I/Users/irfanali/Desktop/concurrency-8/abc -I/Users/irfanali/Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers -I/Users/irfanali/Qt5.9.4/5.9.4/clang_64/lib/QtGui.framework/Headers -I/Users/irfanali/Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/usr/include -F/Users/irfanali/Qt5.9.4/5.9.4/clang_64/lib ../abc/target.h -o moc_target.cpp
+	/Users/irfanali/Qt5.9.4/5.9.4/clang_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/Users/irfanali/Qt5.9.4/5.9.4/clang_64/mkspecs/macx-clang -I/Users/irfanali/Desktop/concurrency-8/abc -I/Users/irfanali/Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers -I/Users/irfanali/Qt5.9.4/5.9.4/clang_64/lib/QtGui.framework/Headers -I/Users/irfanali/Qt5.9.4/5.9.4/clang_64/lib/QtWebSockets.framework/Headers -I/Users/irfanali/Qt5.9.4/5.9.4/clang_64/lib/QtNetwork.framework/Headers -I/Users/irfanali/Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/usr/include -F/Users/irfanali/Qt5.9.4/5.9.4/clang_64/lib ../abc/target.h -o moc_target.cpp
 
 moc_arrow.cpp: ../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/QGraphicsPixmapItem \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/QObject \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qobject.h \
+		../abc/gamestate.h \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/QGraphicsScene \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/qgraphicsscene.h \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/QPointF \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qpoint.h \
 		../abc/arrow.h \
 		moc_predefs.h \
 		../../../Qt5.9.4/5.9.4/clang_64/bin/moc
-	/Users/irfanali/Qt5.9.4/5.9.4/clang_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/Users/irfanali/Qt5.9.4/5.9.4/clang_64/mkspecs/macx-clang -I/Users/irfanali/Desktop/concurrency-8/abc -I/Users/irfanali/Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers -I/Users/irfanali/Qt5.9.4/5.9.4/clang_64/lib/QtGui.framework/Headers -I/Users/irfanali/Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/usr/include -F/Users/irfanali/Qt5.9.4/5.9.4/clang_64/lib ../abc/arrow.h -o moc_arrow.cpp
+	/Users/irfanali/Qt5.9.4/5.9.4/clang_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/Users/irfanali/Qt5.9.4/5.9.4/clang_64/mkspecs/macx-clang -I/Users/irfanali/Desktop/concurrency-8/abc -I/Users/irfanali/Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers -I/Users/irfanali/Qt5.9.4/5.9.4/clang_64/lib/QtGui.framework/Headers -I/Users/irfanali/Qt5.9.4/5.9.4/clang_64/lib/QtWebSockets.framework/Headers -I/Users/irfanali/Qt5.9.4/5.9.4/clang_64/lib/QtNetwork.framework/Headers -I/Users/irfanali/Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/usr/include -F/Users/irfanali/Qt5.9.4/5.9.4/clang_64/lib ../abc/arrow.h -o moc_arrow.cpp
+
+moc_server.cpp: ../../../Qt5.9.4/5.9.4/clang_64/lib/QtWebSockets.framework/Headers/QWebSocketServer \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWebSockets.framework/Headers/qwebsocketserver.h \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWebSockets.framework/Headers/QWebSocket \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWebSockets.framework/Headers/qwebsocket.h \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qobject.h \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/QGraphicsScene \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/qgraphicsscene.h \
+		../abc/gamestate.h \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/QPointF \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qpoint.h \
+		../abc/server.h \
+		moc_predefs.h \
+		../../../Qt5.9.4/5.9.4/clang_64/bin/moc
+	/Users/irfanali/Qt5.9.4/5.9.4/clang_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/Users/irfanali/Qt5.9.4/5.9.4/clang_64/mkspecs/macx-clang -I/Users/irfanali/Desktop/concurrency-8/abc -I/Users/irfanali/Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers -I/Users/irfanali/Qt5.9.4/5.9.4/clang_64/lib/QtGui.framework/Headers -I/Users/irfanali/Qt5.9.4/5.9.4/clang_64/lib/QtWebSockets.framework/Headers -I/Users/irfanali/Qt5.9.4/5.9.4/clang_64/lib/QtNetwork.framework/Headers -I/Users/irfanali/Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/usr/include -F/Users/irfanali/Qt5.9.4/5.9.4/clang_64/lib ../abc/server.h -o moc_server.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -725,6 +761,11 @@ main.o: ../abc/main.cpp ../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/
 		../abc/target.h \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/QGraphicsPixmapItem \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
+		../abc/gamestate.h \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/QGraphicsScene \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/qgraphicsscene.h \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/QPointF \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qpoint.h \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/QObject \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qobject.h \
 		../abc/myplayer1.h \
@@ -732,8 +773,6 @@ main.o: ../abc/main.cpp ../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/
 		../abc/score.h \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/QGraphicsTextItem \
 		../abc/scoreboard.h \
-		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/QGraphicsScene \
-		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/qgraphicsscene.h \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/QGraphicsView \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/qgraphicsview.h \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtGui.framework/Headers/QBrush \
@@ -747,15 +786,17 @@ arrow.o: ../abc/arrow.cpp ../abc/arrow.h \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/QObject \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qobject.h \
+		../abc/gamestate.h \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/QGraphicsScene \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/qgraphicsscene.h \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/QPointF \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qpoint.h \
 		../abc/score.h \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/QGraphicsTextItem \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/QTimer \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qtimer.h \
-		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/QGlobal.h \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/QTime \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qdatetime.h \
-		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/QGraphicsScene \
-		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/qgraphicsscene.h \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtGui.framework/Headers/QList \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtGui.framework/Headers/qevent.h \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qmath.h \
@@ -770,10 +811,13 @@ myplayer1.o: ../abc/myplayer1.cpp ../abc/myplayer1.h \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/QGraphicsPixmapItem \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
 		../abc/bow.h \
-		../../../Qt5.9.4/5.9.4/clang_64/lib/QtGui.framework/Headers/QKeyEvent \
-		../../../Qt5.9.4/5.9.4/clang_64/lib/QtGui.framework/Headers/qevent.h \
+		../abc/gamestate.h \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/QGraphicsScene \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/qgraphicsscene.h \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/QPointF \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qpoint.h \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtGui.framework/Headers/QKeyEvent \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtGui.framework/Headers/qevent.h \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qmath.h \
 		../abc/arrow.h \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/QObject \
@@ -783,12 +827,15 @@ myplayer1.o: ../abc/myplayer1.cpp ../abc/myplayer1.h \
 target.o: ../abc/target.cpp ../abc/target.h \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/QGraphicsPixmapItem \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
+		../abc/gamestate.h \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/QGraphicsScene \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/qgraphicsscene.h \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/QPointF \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qpoint.h \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/QObject \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qobject.h \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/QTimer \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qtimer.h \
-		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/QGraphicsScene \
-		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/qgraphicsscene.h \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/QDebug \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qdebug.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o target.o ../abc/target.cpp
@@ -813,8 +860,28 @@ bow.o: ../abc/bow.cpp ../abc/bow.h \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/qgraphicsitem.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o bow.o ../abc/bow.cpp
 
-gamestate.o: ../abc/gamestate.cpp 
+gamestate.o: ../abc/gamestate.cpp ../abc/gamestate.h \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/QGraphicsScene \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/qgraphicsscene.h \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/QPointF \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qpoint.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o gamestate.o ../abc/gamestate.cpp
+
+server.o: ../abc/server.cpp ../abc/server.h \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWebSockets.framework/Headers/QWebSocketServer \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWebSockets.framework/Headers/qwebsocketserver.h \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWebSockets.framework/Headers/QWebSocket \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWebSockets.framework/Headers/qwebsocket.h \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qobject.h \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/QGraphicsScene \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/qgraphicsscene.h \
+		../abc/gamestate.h \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/QPointF \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qpoint.h \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/QDebug \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qdebug.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o server.o ../abc/server.cpp
 
 qrc_resources.o: qrc_resources.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_resources.o qrc_resources.cpp
@@ -824,6 +891,9 @@ moc_target.o: moc_target.cpp
 
 moc_arrow.o: moc_arrow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_arrow.o moc_arrow.cpp
+
+moc_server.o: moc_server.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_server.o moc_server.cpp
 
 ####### Install
 
