@@ -62,8 +62,6 @@ void myplayer1::keyPressEvent(QKeyEvent *event)
        }
        else if ((event->key() == Qt::Key_Space)&& flag==0)
        {
-           // create an arrow
-
             arrow * a = new arrow(state);
             state->isArrow1 = true;
             a->angle = bow1->angle;

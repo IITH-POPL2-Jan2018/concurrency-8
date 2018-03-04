@@ -1,7 +1,7 @@
 #include "arrow.h"
 #include "score.h"
 #include <QTimer>
-//#include <QGlobal.h>
+#include <QtCore/qglobal.h>
 #include <QTime>
 #include <QGraphicsScene>
 #include <QList>

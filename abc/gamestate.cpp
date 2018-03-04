@@ -1,5 +1,7 @@
 #include "gamestate.h"
-gamestate::gamestate(QGraphicsScene *scene)
+#include <QGraphicsScene>
+
+gamestate::gamestate(QGraphicsScene * scene)
 {
     stateScene = scene;
     isArrow1 = false;
