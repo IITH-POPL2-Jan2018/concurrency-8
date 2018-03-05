@@ -45,7 +45,7 @@ void client::processBinary(QByteArray message_bytes)
     state->TargetPosition.setY(message["target_posY"].toInt());
     state->isArrow2 = message["isArrow1"].toBool();
     //state->isArrow2 = message["isArrow2"].toBool();
-    if(state->isArrow1)
+    if(state->isArrow2)
     {
         state->Arrow2Position.setX(800 - message["arrow1_posX"].toInt());
         state->Arrow2Position.setY(message["arrow1_posY"].toInt());
