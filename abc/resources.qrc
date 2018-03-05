@@ -17,5 +17,11 @@
         <file>bow.png</file>
         <file>arrow2_flip.png</file>
         <file>bow_flip.png</file>
+        <file>playerright.png</file>
+        <file>playerleft.png</file>
+        <file>bowright.png</file>
+        <file>bowleft.png</file>
+        <file>arrowright.png</file>
+        <file>arrowleft.png</file>
     </qresource>
 </RCC>
