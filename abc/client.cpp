@@ -63,7 +63,7 @@ void client::processBinary(QByteArray message_bytes)
     }*/
     double angle = message["bow1_angle"].toDouble();
     if(angle < 0)
-        state->Bow2Angle = -(180 - angle);
+        state->Bow2Angle = (180 - angle);
     else
         state->Bow2Angle = 180 - angle;
     //state->Bow2Angle = (message["bow2_angle"].toDouble());
