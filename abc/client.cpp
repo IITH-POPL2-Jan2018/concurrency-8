@@ -41,14 +41,14 @@ void client::processBinary(QByteArray message_bytes)
     state->Player2Position.setY(message["player1_posY"].toInt());
    // state->Player2Position.setX(message["player2_posX"].toInt());
    // state->Player2Position.setY(message["player2_posY"].toInt());
-    state->TargetPosition.setX(800 - message["target_posX"].toInt());
-    state->TargetPosition.setY(message["target_posY"].toInt());
+    state->TargetPosition.setX(800 - message["target_posX"].toDouble());
+    state->TargetPosition.setY(message["target_posY"].toDouble());
     state->isArrow2 = message["isArrow1"].toBool();
     //state->isArrow2 = message["isArrow2"].toBool();
     if(state->isArrow2)
     {
-        state->Arrow2Position.setX(800 - message["arrow1_posX"].toInt());
-        state->Arrow2Position.setY(message["arrow1_posY"].toInt());
+        state->Arrow2Position.setX(800 - message["arrow1_posX"].toDouble());
+        state->Arrow2Position.setY(message["arrow1_posY"].toDouble());
         double angle  = message["arrow1_angle"].toDouble();
         if(angle < 0)
            state->Arrow2Angle = -(180 + angle);
