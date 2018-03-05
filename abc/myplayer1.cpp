@@ -29,6 +29,7 @@ myplayer1::myplayer1(int i, gamestate *state_param)
     b->setPos(x(),y());
     bow1 = b;
     player2Arrow = new arrow(1);
+    //scene()->addItem(player2Arrow);
     state->isArrow2 = true;
     flag=0;
 }

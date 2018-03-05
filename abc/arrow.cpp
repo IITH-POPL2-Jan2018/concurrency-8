@@ -79,8 +79,8 @@ void arrow::move(){
     double dy = 80 * qSin(qDegreesToRadians(-1*angle))*time-(5*(time*time));
     double dx = 80 * qCos(qDegreesToRadians(angle)) * time;
     setPos(initialX+dx,initialY-dy);
-    state->Arrow1Position.setX(x());
-    state->Arrow1Position.setY(y());
+    state->Arrow1Position.setX(pos().x());
+    state->Arrow1Position.setY(pos().y());
     if (pos().x() > 475)
     {
         scene()->removeItem(this);

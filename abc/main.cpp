@@ -33,6 +33,7 @@ int main(int argc, char *argv[]){
     scene->addItem(p1->bow1);
     scene->addItem(p2);
     scene->addItem(p2->bow1);
+    scene->addItem(p2->player2Arrow);
     target * t = new target(state);
     scene->addItem(t);
     // make rect focusable
@@ -71,6 +72,8 @@ int main(int argc, char *argv[]){
     state->Arrow1Angle = 180;
     server * GameServer = new server(scene,1234,state);
     GameServer->startServer();
+    //client * GameClient  = new client(state);
+    //GameClient->estServerConnection(QUrl("ws://ip:1234"));
     screenUpdate * u = new screenUpdate(scene,state,p1,p2,t);
     u->startUpdate();
     return a.exec();

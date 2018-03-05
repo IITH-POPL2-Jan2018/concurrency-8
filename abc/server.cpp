@@ -17,7 +17,7 @@ server::server(QGraphicsScene *scene_param, quint16 port_param, gamestate *state
 void server::startServer()
 {
 
-    if(server_local->listen(QHostAddress("192.168.43.210"),port))
+    if(server_local->listen(QHostAddress("10.42.0.242"),port))
     {
             qDebug() << "Server Started";
             qDebug() << server_local->serverUrl().toString();
@@ -91,7 +91,7 @@ void server::processBinary(QByteArray binary)
     state->TargetPosition.setY(message["target_posY"].toInt());
     state->isArrow2 = message["isArrow1"].toBool();
     //state->isArrow2 = message["isArrow2"].toBool();
-    if(state->isArrow1)
+    if(state->isArrow2)
     {
         state->Arrow2Position.setX(800 - message["arrow1_posX"].toInt());
         state->Arrow2Position.setY(message["arrow1_posY"].toInt());
