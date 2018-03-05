@@ -20,6 +20,14 @@ target::target(gamestate *state_param)
         timer->start(50);
 }
 
+target::target(int i, gamestate *state_param)
+{
+    state = state_param;
+    QPixmap tar(":/images/bug1.png");
+    QPixmap scaled= tar.scaled(QSize(40,40));
+    setPixmap(scaled);
+}
+
 void target::move()
 {
     if(a == 0){

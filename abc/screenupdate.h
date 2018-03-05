@@ -12,11 +12,12 @@ class screenUpdate : public QObject{
 public:
 
     QGraphicsScene * scene_local;
+    int id;
     myplayer1 * p1;
     myplayer1 * p2;
     target * t;
     gamestate * state;
-    screenUpdate(QGraphicsScene * scene_param,gamestate * state_param , myplayer1 * p1_param, myplayer1 * p2_param , target * t_param);
+    screenUpdate(QGraphicsScene * scene_param,gamestate * state_param , myplayer1 * p1_param, myplayer1 * p2_param , target * t_param,int i);
     void startUpdate();
 private Q_SLOTS:
     void Update();

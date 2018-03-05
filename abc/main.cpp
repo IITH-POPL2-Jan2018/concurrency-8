@@ -35,6 +35,7 @@ int main(int argc, char *argv[]){
     scene->addItem(p2->bow1);
     scene->addItem(p2->player2Arrow);
     target * t = new target(state);
+    //target * t = new target(1,state);
     scene->addItem(t);
     // make rect focusable
     p1->setFlag(QGraphicsItem::ItemIsFocusable);
@@ -74,7 +75,7 @@ int main(int argc, char *argv[]){
     GameServer->startServer();
     //client * GameClient  = new client(state);
     //GameClient->estServerConnection(QUrl("ws://ip:1234"));
-    screenUpdate * u = new screenUpdate(scene,state,p1,p2,t);
+    screenUpdate * u = new screenUpdate(scene,state,p1,p2,t,0);
     u->startUpdate();
     return a.exec();
 }

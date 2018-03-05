@@ -10,6 +10,7 @@ class target: public QObject, public QGraphicsPixmapItem{
 public:
     gamestate * state;
     target(gamestate * state_param);
+    target(int i,gamestate * state_param);
     int a;
 public slots:
     void move();
