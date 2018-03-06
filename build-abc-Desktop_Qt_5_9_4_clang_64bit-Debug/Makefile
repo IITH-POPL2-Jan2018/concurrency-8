@@ -60,7 +60,8 @@ SOURCES       = ../abc/main.cpp \
 		../abc/gamestate.cpp \
 		../abc/server.cpp \
 		../abc/client.cpp \
-		../abc/screenupdate.cpp qrc_resources.cpp \
+		../abc/screenupdate.cpp \
+		../abc/mainthread.cpp qrc_resources.cpp \
 		moc_target.cpp \
 		moc_arrow.cpp \
 		moc_server.cpp \
@@ -77,6 +78,7 @@ OBJECTS       = main.o \
 		server.o \
 		client.o \
 		screenupdate.o \
+		mainthread.o \
 		qrc_resources.o \
 		moc_target.o \
 		moc_arrow.o \
@@ -254,7 +256,8 @@ DIST          = ../../../Qt5.9.4/5.9.4/clang_64/mkspecs/features/spec_pre.prf \
 		../abc/gamestate.h \
 		../abc/server.h \
 		../abc/client.h \
-		../abc/screenupdate.h ../abc/main.cpp \
+		../abc/screenupdate.h \
+		../abc/mainthread.h ../abc/main.cpp \
 		../abc/arrow.cpp \
 		../abc/myplayer1.cpp \
 		../abc/target.cpp \
@@ -264,7 +267,8 @@ DIST          = ../../../Qt5.9.4/5.9.4/clang_64/mkspecs/features/spec_pre.prf \
 		../abc/gamestate.cpp \
 		../abc/server.cpp \
 		../abc/client.cpp \
-		../abc/screenupdate.cpp
+		../abc/screenupdate.cpp \
+		../abc/mainthread.cpp
 QMAKE_TARGET  = abc
 DESTDIR       = 
 TARGET        = abc.app/Contents/MacOS/abc
@@ -652,8 +656,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../abc/resources.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents ../../../Qt5.9.4/5.9.4/clang_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../abc/target.h ../abc/arrow.h ../abc/myplayer1.h ../abc/score.h ../abc/scoreboard.h ../abc/bow.h ../abc/gamestate.h ../abc/server.h ../abc/client.h ../abc/screenupdate.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../abc/main.cpp ../abc/arrow.cpp ../abc/myplayer1.cpp ../abc/target.cpp ../abc/score.cpp ../abc/scoreboard.cpp ../abc/bow.cpp ../abc/gamestate.cpp ../abc/server.cpp ../abc/client.cpp ../abc/screenupdate.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../abc/target.h ../abc/arrow.h ../abc/myplayer1.h ../abc/score.h ../abc/scoreboard.h ../abc/bow.h ../abc/gamestate.h ../abc/server.h ../abc/client.h ../abc/screenupdate.h ../abc/mainthread.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../abc/main.cpp ../abc/arrow.cpp ../abc/myplayer1.cpp ../abc/target.cpp ../abc/score.cpp ../abc/scoreboard.cpp ../abc/bow.cpp ../abc/gamestate.cpp ../abc/server.cpp ../abc/client.cpp ../abc/screenupdate.cpp ../abc/mainthread.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -682,23 +686,29 @@ compiler_rcc_clean:
 	-$(DEL_FILE) qrc_resources.cpp
 qrc_resources.cpp: ../abc/resources.qrc \
 		../../../Qt5.9.4/5.9.4/clang_64/bin/rcc \
+		../abc/playerleft.png \
 		../abc/bug2.jpeg \
+		../abc/playerright.png \
+		../abc/arrow_flip.png \
+		../abc/index.png \
+		../abc/arrowright.png \
+		../abc/bowleft.png \
+		../abc/bug1.png \
+		../abc/stickman.png \
+		../abc/arrowleft.png \
+		../abc/bug.png \
 		../abc/bow_flip.png \
 		../abc/arrow2_flip.png \
-		../abc/bug.png \
-		../abc/target1.png \
-		../abc/stickman.png \
-		../abc/bow.png \
-		../abc/bug1.png \
-		../abc/arrow_flip.png \
 		../abc/arrow2.png \
 		../abc/arrow8.jpg \
-		../abc/index.png \
+		../abc/arrow.png \
+		../abc/Bubble.png \
+		../abc/bowright.png \
+		../abc/target1.png \
+		../abc/bow.png \
 		../abc/score.png \
 		../abc/bg.resized.jpeg \
-		../abc/Bubble.png \
-		../abc/a1.png \
-		../abc/arrow.png
+		../abc/a1.png
 	/Users/irfanali/Qt5.9.4/5.9.4/clang_64/bin/rcc -name resources ../abc/resources.qrc -o qrc_resources.cpp
 
 compiler_moc_predefs_make_all: moc_predefs.h
@@ -849,8 +859,17 @@ main.o: ../abc/main.cpp ../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/QJsonValue \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qjsonvalue.h \
 		../abc/screenupdate.h \
+		../abc/server.h \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWebSockets.framework/Headers/QWebSocketServer \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWebSockets.framework/Headers/qwebsocketserver.h \
+		../abc/client.h \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/QJsonDocument \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qjsondocument.h \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/QTimer \
-		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qtimer.h
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qtimer.h \
+		../abc/mainthread.h \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/QThread \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qthread.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../abc/main.cpp
 
 arrow.o: ../abc/arrow.cpp ../abc/arrow.h \
@@ -1010,8 +1029,35 @@ screenupdate.o: ../abc/screenupdate.cpp ../abc/screenupdate.h \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qobject.h \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWebSockets.framework/Headers/QWebSocket \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWebSockets.framework/Headers/qwebsocket.h \
-		../abc/target.h
+		../abc/target.h \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/QTimer \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qtimer.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o screenupdate.o ../abc/screenupdate.cpp
+
+mainthread.o: ../abc/mainthread.cpp ../abc/mainthread.h \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/QGraphicsScene \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/qgraphicsscene.h \
+		../abc/gamestate.h \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/QPointF \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qpoint.h \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/QJsonObject \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qjsonobject.h \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/QThread \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qthread.h \
+		../abc/myplayer1.h \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/QGraphicsPixmapItem \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
+		../abc/bow.h \
+		../abc/arrow.h \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qobject.h \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWebSockets.framework/Headers/QWebSocket \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWebSockets.framework/Headers/qwebsocket.h \
+		../abc/target.h \
+		../abc/score.h \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/QGraphicsTextItem \
+		../abc/scoreboard.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainthread.o ../abc/mainthread.cpp
 
 qrc_resources.o: qrc_resources.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_resources.o qrc_resources.cpp

@@ -35,7 +35,8 @@ SOURCES += \
     gamestate.cpp \
     server.cpp \
     client.cpp \
-    screenupdate.cpp
+    screenupdate.cpp \
+    mainthread.cpp
 
 HEADERS += \
     target.h \
@@ -47,7 +48,8 @@ HEADERS += \
     gamestate.h \
     server.h \
     client.h \
-    screenupdate.h
+    screenupdate.h \
+    mainthread.h
 
 RESOURCES += \
     resources.qrc
