@@ -18,6 +18,7 @@ public:
     target * t;
     gamestate * state;
     screenUpdate(QGraphicsScene * scene_param,gamestate * state_param , myplayer1 * p2_param,int i);
+    screenUpdate(QGraphicsScene * scene_param,gamestate * state_param , myplayer1 * p2_param,int i,target * t_param);
     void startUpdate();
 private Q_SLOTS:
     void Update();

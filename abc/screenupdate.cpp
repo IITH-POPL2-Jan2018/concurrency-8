@@ -10,6 +10,15 @@ screenUpdate::screenUpdate(QGraphicsScene *scene_param, gamestate *state_param ,
     p2 = p2_param;
    // t = t_param;
 }
+screenUpdate::screenUpdate(QGraphicsScene *scene_param, gamestate *state_param , myplayer1 * p2_param , int i, target *t_param)
+{
+    scene_local = scene_param;
+    state = state_param;
+    id = i;
+   // p1 = p1_param;
+    p2 = p2_param;
+    t = t_param;
+}
 
 void screenUpdate::startUpdate()
 {
