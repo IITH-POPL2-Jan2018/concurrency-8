@@ -1,16 +1,16 @@
 /****************************************************************************
-** Meta object code from reading C++ file 'server.h'
+** Meta object code from reading C++ file 'client.h'
 **
 ** Created by: The Qt Meta Object Compiler version 67 (Qt 5.9.1)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
-#include "../abc/server.h"
+#include "../abc/client.h"
 #include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)
-#error "The header file 'server.h' doesn't include <QObject>."
+#error "The header file 'client.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 67
 #error "This file was generated using the moc from 5.9.1. It"
 #error "cannot be used with the include files from this version of Qt."
@@ -20,33 +20,34 @@
 QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
-struct qt_meta_stringdata_server_t {
+struct qt_meta_stringdata_client_t {
     QByteArrayData data[8];
-    char stringdata0[76];
+    char stringdata0[83];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
-    qptrdiff(offsetof(qt_meta_stringdata_server_t, stringdata0) + ofs \
+    qptrdiff(offsetof(qt_meta_stringdata_client_t, stringdata0) + ofs \
         - idx * sizeof(QByteArrayData)) \
     )
-static const qt_meta_stringdata_server_t qt_meta_stringdata_server = {
+static const qt_meta_stringdata_client_t qt_meta_stringdata_client = {
     {
-QT_MOC_LITERAL(0, 0, 6), // "server"
+QT_MOC_LITERAL(0, 0, 6), // "client"
 QT_MOC_LITERAL(1, 7, 15), // "connectionSetup"
 QT_MOC_LITERAL(2, 23, 0), // ""
 QT_MOC_LITERAL(3, 24, 11), // "processText"
 QT_MOC_LITERAL(4, 36, 4), // "text"
 QT_MOC_LITERAL(5, 41, 13), // "processBinary"
-QT_MOC_LITERAL(6, 55, 6), // "binary"
-QT_MOC_LITERAL(7, 62, 13) // "sendGameState"
+QT_MOC_LITERAL(6, 55, 13), // "message_bytes"
+QT_MOC_LITERAL(7, 69, 13) // "sendGameState"
 
     },
-    "server\0connectionSetup\0\0processText\0"
-    "text\0processBinary\0binary\0sendGameState"
+    "client\0connectionSetup\0\0processText\0"
+    "text\0processBinary\0message_bytes\0"
+    "sendGameState"
 };
 #undef QT_MOC_LITERAL
 
-static const uint qt_meta_data_server[] = {
+static const uint qt_meta_data_client[] = {
 
  // content:
        7,       // revision
@@ -74,10 +75,10 @@ static const uint qt_meta_data_server[] = {
        0        // eod
 };
 
-void server::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+void client::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     if (_c == QMetaObject::InvokeMetaMethod) {
-        server *_t = static_cast<server *>(_o);
+        client *_t = static_cast<client *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
         case 0: _t->connectionSetup(); break;
@@ -89,26 +90,26 @@ void server::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void
     }
 }
 
-const QMetaObject server::staticMetaObject = {
-    { &QObject::staticMetaObject, qt_meta_stringdata_server.data,
-      qt_meta_data_server,  qt_static_metacall, nullptr, nullptr}
+const QMetaObject client::staticMetaObject = {
+    { &QObject::staticMetaObject, qt_meta_stringdata_client.data,
+      qt_meta_data_client,  qt_static_metacall, nullptr, nullptr}
 };
 
 
-const QMetaObject *server::metaObject() const
+const QMetaObject *client::metaObject() const
 {
     return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
 }
 
-void *server::qt_metacast(const char *_clname)
+void *client::qt_metacast(const char *_clname)
 {
     if (!_clname) return nullptr;
-    if (!strcmp(_clname, qt_meta_stringdata_server.stringdata0))
-        return static_cast<void*>(const_cast< server*>(this));
+    if (!strcmp(_clname, qt_meta_stringdata_client.stringdata0))
+        return static_cast<void*>(const_cast< client*>(this));
     return QObject::qt_metacast(_clname);
 }
 
-int server::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+int client::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
     _id = QObject::qt_metacall(_c, _id, _a);
     if (_id < 0)

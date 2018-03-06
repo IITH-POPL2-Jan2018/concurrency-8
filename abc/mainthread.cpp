@@ -29,7 +29,7 @@ void mainThread::run1()
     //points = new score();
     scene->addItem(points);
     p1->setPos(0,200);
-    p1->bow1->setPos(60,210);
+    p1->bow1->setPos(45,200);
     s->setPos(200,0);
     t->setPos(800/2,600-60);
     //state->StateSet(p1,p2,t);

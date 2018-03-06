@@ -72,8 +72,8 @@ int main(int argc, char *argv[]){
     scene->setBackgroundBrush(QBrush(QImage(":/images/bg.resized.jpeg")));
    /* p1->setPos(0,200);
     p1->bow1->setPos(60,210);*/
-    p2->setPos(650,200);
-    p2->bow1->setPos(740,210 +45);
+    p2->setPos(730,200);
+    p2->bow1->setPos(715,200);
     p2->bow1->setRotation(180);
     /*s->setPos(200,0);
     t->setPos(view->width()/2,view->height()-60);
@@ -133,7 +133,7 @@ int main(int argc, char *argv[]){
         scene->setSceneRect(0,0,800,600);
         scene->setBackgroundBrush(QBrush(QImage(":/images/bg.resized.jpeg")));
         p1->setPos(0,200);
-        p1->bow1->setPos(60,210);
+        p1->bow1->setPos(40,200);
         p2->setPos(650,200);
         p2->bow1->setPos(740,210 +45);
         p2->bow1->setRotation(180);

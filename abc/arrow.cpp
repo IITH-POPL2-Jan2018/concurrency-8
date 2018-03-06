@@ -18,7 +18,7 @@ arrow::arrow(gamestate *state_param, target *t_param)
 {
     state = state_param;
     t = t_param;
-    QPixmap arro(":/images/a1.png");
+    QPixmap arro(":/images/arrowright.png");
     QPixmap scaled= arro.scaled(QSize(40,25));
     setPixmap(scaled);
 
@@ -32,7 +32,7 @@ arrow::arrow(gamestate *state_param, target *t_param)
 
 arrow::arrow(int i)
 {
-    QPixmap arro(":/images/a1.png");
+    QPixmap arro(":/images/arrowright.png");
     QPixmap scaled= arro.scaled(QSize(40,25));
     setPixmap(scaled);
 }
