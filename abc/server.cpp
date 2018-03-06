@@ -84,7 +84,7 @@ void server::processBinary(QByteArray binary)
 {
     QJsonDocument message_doc = QJsonDocument::fromBinaryData(binary);
     QJsonObject message = message_doc.object();
-    state->Player2Position.setX(650);
+    state->Player2Position.setX(710);
     state->Player2Position.setY(message["player1_posY"].toInt());
    // state->Player2Position.setX(message["player2_posX"].toInt());
    // state->Player2Position.setY(message["player2_posY"].toInt());
