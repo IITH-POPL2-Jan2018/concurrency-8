@@ -19,8 +19,10 @@
 #include <QTimer>
 #include "mainthread.h"
 #include <QThread>
+#include <QMutex>
 
 score * points ;
+QMutex mutex;
 int flag;
 
 int main(int argc, char *argv[]){
@@ -153,7 +155,7 @@ int main(int argc, char *argv[]){
         //server * GameServer = new server(scene,1234,state);
         //GameServer->startServer();
         client * GameClient  = new client(state);
-        GameClient->estServerConnection(QUrl("ws://192.168.43.245:1234"));
+        GameClient->estServerConnection(QUrl("ws://192.168.137.56:1234"));
         screenUpdate * u = new screenUpdate(scene,state,p2,1,t);
         u->startUpdate();
     }

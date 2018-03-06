@@ -4,6 +4,7 @@
 #include <qmath.h>
 #include "arrow.h"
 #include "bow.h"
+
 extern int flag;
 myplayer1::myplayer1(gamestate *state_param, target *t_param)
 {

@@ -4,6 +4,9 @@
 #include <QTimer>
 #include <QJsonObject>
 #include <QJsonDocument>
+#include <QMutex>
+
+extern QMutex mutex;
 
 server::server(QGraphicsScene *scene_param, quint16 port_param, gamestate *state_param, target *t_param):
     port(port_param)
@@ -18,7 +21,7 @@ server::server(QGraphicsScene *scene_param, quint16 port_param, gamestate *state
 void server::startServer()
 {
 
-    if(server_local->listen(QHostAddress("192.168.43.245"),port))
+    if(server_local->listen(QHostAddress("192.168.137.56"),port))
     {
             qDebug() << "Server Started";
             qDebug() << server_local->serverUrl().toString();
@@ -92,30 +95,43 @@ void server::processBinary(QByteArray binary)
     //state->TargetPosition.setY(message["target_posY"].toDouble());
    double targetX = 800 - message["target_posX"].toDouble();
    double targetY = message["target_posY"].toDouble();
-   state->isArrow2 = message["isArrow1"].toBool();
+   bool a = message["isArrow1"].toBool();
+   qDebug()<< "arrow condition = " << a;
     //state->isArrow2 = message["isArrow2"].toBool();
-    if(state->isArrow2)
+    if(a)
     {
 
         state->Arrow2Position.setX(800 - message["arrow1_posX"].toDouble());
+        qDebug() << "a";
         state->Arrow2Position.setY(message["arrow1_posY"].toDouble() + 25);
+        qDebug() << "b";
         if(state->Arrow2Position.x()>=(targetX-20) && state->Arrow2Position.x() <= (targetX + 20)){
+            qDebug() << "c";
             if(state->Arrow2Position.y()>=(targetY-20) && state->Arrow2Position.y() <= (targetY + 20)){
+                mutex.lock();
+                qDebug() << "d";
                 if(t->a==1){
                     t->a = 0;
                     t->setRotation(0);
                 }
+                qDebug() << "e";
                 QTime time = QTime::currentTime();
                 qsrand((uint)time.msec());
-                t->setPos(qrand()%100+350,qrand()%600);
+                qDebug() << "ea";
+                t->setPos(400,350);//qrand()%100+350,qrand()%600);
+                qDebug() << "f";
                 state->TargetPosition.setX(t->x());
                 state->TargetPosition.setY(t->y());
+                qDebug() << "g";
                 t->a = qrand()%2;
+                qDebug() << "ga";
+                qDebug() << t->a;
                 if(t->a == 0)
-                    t->setRotation(0);
+                    t->setRotation(0),qDebug() << "gaa";
                 else
-                    t->setRotation(180);
-
+                    t->setRotation(180),qDebug() << "gab";;
+                qDebug() << "h";
+                mutex.unlock();
             }
         }
         qDebug() << "Arrow X = " << state->Arrow2Position.x() << " Arrow Y = " << state->Arrow2Position.y();

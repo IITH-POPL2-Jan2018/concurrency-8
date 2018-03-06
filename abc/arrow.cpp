@@ -10,9 +10,10 @@
 #include "myplayer1.h"
 #include <typeinfo>
 #include <QDebug>
-
+#include <QMutex>
 extern score * points;
 extern int flag;
+extern QMutex mutex;
 
 arrow::arrow(gamestate *state_param, target *t_param)
 {
@@ -79,6 +80,8 @@ void arrow::move(){
             points->increase();
             scene()->removeItem(this);
             //lock(Acquire)
+            mutex.lock();
+            qDebug() << "bbbbb";
                 if(t->a==1){
                     t->a = 0;
                     t->setRotation(0);
@@ -94,6 +97,7 @@ void arrow::move(){
                 else
                     t->setRotation(180);
             //release(lock)
+                mutex.unlock();
                 delete this;
                 state->isArrow1=false;
                 flag=0;
