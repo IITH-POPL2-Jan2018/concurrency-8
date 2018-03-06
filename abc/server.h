@@ -5,6 +5,7 @@
 #include <QObject>
 #include <QGraphicsScene>
 #include "gamestate.h"
+#include "target.h"
 
 
 class server: public QObject{
@@ -20,6 +21,7 @@ class server: public QObject{
     QGraphicsScene * scene;
     gamestate * state;
     void startGame();
+    target *t;
 
    private Q_SLOTS:
 
@@ -30,7 +32,7 @@ class server: public QObject{
 
    public:
 
-    server(QGraphicsScene * scene_param,quint16 port_param,gamestate * state_param);
+    server(QGraphicsScene * scene_param,quint16 port_param,gamestate * state_param, target *t_param);
     void startServer();
     void gameLoop();
 

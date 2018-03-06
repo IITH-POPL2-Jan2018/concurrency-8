@@ -32,7 +32,7 @@ arrow::arrow(gamestate *state_param, target *t_param)
 
 arrow::arrow(int i)
 {
-    QPixmap arro(":/images/a1.png");
+    QPixmap arro(":/images/arrowright.png");
     QPixmap scaled= arro.scaled(QSize(40,25));
     setPixmap(scaled);
 }
@@ -74,7 +74,7 @@ void arrow::move(){
             }
         }
     */
-    if(pos().x()>=(t->x()-20) && pos().x()<=(t->x())){
+    if(pos().x()>=(t->x()-20) && pos().x()<=(t->x()+20)){
         if(pos().y()<(t->y()+20) && pos().y()>(t->y()-20)){
             points->increase();
             scene()->removeItem(this);

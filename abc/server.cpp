@@ -5,9 +5,10 @@
 #include <QJsonObject>
 #include <QJsonDocument>
 
-server::server(QGraphicsScene *scene_param, quint16 port_param, gamestate *state_param):
+server::server(QGraphicsScene *scene_param, quint16 port_param, gamestate *state_param, target *t_param):
     port(port_param)
 {
+    t = t_param;
     state = state_param;
 
     gameStarted = false;
@@ -17,7 +18,7 @@ server::server(QGraphicsScene *scene_param, quint16 port_param, gamestate *state
 void server::startServer()
 {
 
-    if(server_local->listen(QHostAddress("192.168.116.133"),port))
+    if(server_local->listen(QHostAddress("192.168.43.245"),port))
     {
             qDebug() << "Server Started";
             qDebug() << server_local->serverUrl().toString();
@@ -87,14 +88,36 @@ void server::processBinary(QByteArray binary)
     state->Player2Position.setY(message["player1_posY"].toInt());
    // state->Player2Position.setX(message["player2_posX"].toInt());
    // state->Player2Position.setY(message["player2_posY"].toInt());
-    state->TargetPosition.setX(800 - message["target_posX"].toDouble());
-    state->TargetPosition.setY(message["target_posY"].toDouble());
-    state->isArrow2 = message["isArrow1"].toBool();
+  //  state->TargetPosition.setX(800 - message["target_posX"].toDouble());
+    //state->TargetPosition.setY(message["target_posY"].toDouble());
+   double targetX = 800 - message["target_posX"].toDouble();
+   double targetY = message["target_posY"].toDouble();
+   state->isArrow2 = message["isArrow1"].toBool();
     //state->isArrow2 = message["isArrow2"].toBool();
     if(state->isArrow2)
     {
+
         state->Arrow2Position.setX(800 - message["arrow1_posX"].toDouble());
         state->Arrow2Position.setY(message["arrow1_posY"].toDouble() + 25);
+        if(state->Arrow2Position.x()>=(targetX-20) && state->Arrow2Position.x() <= (targetX + 20)){
+            if(state->Arrow2Position.y()>=(targetY-20) && state->Arrow2Position.y() <= (targetY + 20)){
+                if(t->a==1){
+                    t->a = 0;
+                    t->setRotation(0);
+                }
+                QTime time = QTime::currentTime();
+                qsrand((uint)time.msec());
+                t->setPos(qrand()%100+350,qrand()%600);
+                state->TargetPosition.setX(t->x());
+                state->TargetPosition.setY(t->y());
+                t->a = qrand()%2;
+                if(t->a == 0)
+                    t->setRotation(0);
+                else
+                    t->setRotation(180);
+
+            }
+        }
         qDebug() << "Arrow X = " << state->Arrow2Position.x() << " Arrow Y = " << state->Arrow2Position.y();
         double angle  = message["arrow1_angle"].toDouble();
         if(angle < 0)

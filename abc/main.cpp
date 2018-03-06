@@ -88,7 +88,7 @@ int main(int argc, char *argv[]){
     state->Arrow1Angle =0;*/
     state->Bow2Angle = 180;
     state->Arrow2Angle = 180;
-    server * GameServer = new server(scene,1234,state);
+    server * GameServer = new server(scene,1234,state,t);
     GameServer->startServer();
     //client * GameClient  = new client(state);
     //GameClient->estServerConnection(QUrl("ws://ip:1234"));
@@ -153,7 +153,7 @@ int main(int argc, char *argv[]){
         //server * GameServer = new server(scene,1234,state);
         //GameServer->startServer();
         client * GameClient  = new client(state);
-        GameClient->estServerConnection(QUrl("ws://192.168.116.133:1234"));
+        GameClient->estServerConnection(QUrl("ws://192.168.43.245:1234"));
         screenUpdate * u = new screenUpdate(scene,state,p2,1,t);
         u->startUpdate();
     }
