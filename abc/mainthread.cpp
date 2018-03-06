@@ -11,14 +11,16 @@ mainThread::mainThread(QGraphicsScene *scene_param, gamestate *state_param, scor
     points = points_param;
     p1 = p1_param;
     t = t_param;
+    run1();
 }
 
-void mainThread::run()
+void mainThread::run1()
 {
     p1 = new myplayer1(state);
     scene->addItem(p1);
     scene->addItem(p1->bow1);
     t = new target(state);
+
     scene->addItem(t);
     // make rect focusable
     p1->setFlag(QGraphicsItem::ItemIsFocusable);

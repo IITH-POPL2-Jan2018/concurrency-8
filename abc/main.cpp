@@ -18,8 +18,11 @@
 #include "client.h"
 #include <QTimer>
 #include "mainthread.h"
+#include <QThread>
+
 score * points ;
 int flag;
+
 int main(int argc, char *argv[]){
     QApplication a(argc, argv);
 
@@ -29,8 +32,12 @@ int main(int argc, char *argv[]){
     points = new score();
     myplayer1 * p1;
     target * t;
-    mainThread * thread = new mainThread(scene,state,points,p1,t);
-    thread->start();
+    QThread * thread1 = new QThread();
+    thread1->start();
+    mainThread * threadclass = new mainThread(scene,state,points,p1,t);
+    threadclass->moveToThread(thread1);
+    //thread->start();
+
     // create an item to add to the scene
    // myplayer1 * p1 = new myplayer1(state);
 

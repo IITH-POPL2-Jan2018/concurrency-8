@@ -66,7 +66,8 @@ SOURCES       = ../abc/main.cpp \
 		moc_arrow.cpp \
 		moc_server.cpp \
 		moc_client.cpp \
-		moc_screenupdate.cpp
+		moc_screenupdate.cpp \
+		moc_mainthread.cpp
 OBJECTS       = main.o \
 		arrow.o \
 		myplayer1.o \
@@ -84,7 +85,8 @@ OBJECTS       = main.o \
 		moc_arrow.o \
 		moc_server.o \
 		moc_client.o \
-		moc_screenupdate.o
+		moc_screenupdate.o \
+		moc_mainthread.o
 DIST          = ../../../Qt5.9.4/5.9.4/clang_64/mkspecs/features/spec_pre.prf \
 		../../../Qt5.9.4/5.9.4/clang_64/mkspecs/qdevice.pri \
 		../../../Qt5.9.4/5.9.4/clang_64/mkspecs/features/device_config.prf \
@@ -717,9 +719,9 @@ compiler_moc_predefs_clean:
 moc_predefs.h: ../../../Qt5.9.4/5.9.4/clang_64/mkspecs/features/data/dummy.cpp
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ -pipe -stdlib=libc++ -g -std=gnu++11 $(EXPORT_ARCH_ARGS) -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk -mmacosx-version-min=10.10 -Wall -W -dM -E -o moc_predefs.h ../../../Qt5.9.4/5.9.4/clang_64/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_target.cpp moc_arrow.cpp moc_server.cpp moc_client.cpp moc_screenupdate.cpp
+compiler_moc_header_make_all: moc_target.cpp moc_arrow.cpp moc_server.cpp moc_client.cpp moc_screenupdate.cpp moc_mainthread.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_target.cpp moc_arrow.cpp moc_server.cpp moc_client.cpp moc_screenupdate.cpp
+	-$(DEL_FILE) moc_target.cpp moc_arrow.cpp moc_server.cpp moc_client.cpp moc_screenupdate.cpp moc_mainthread.cpp
 moc_target.cpp: ../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/QGraphicsPixmapItem \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
 		../abc/gamestate.h \
@@ -809,6 +811,32 @@ moc_screenupdate.cpp: ../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/He
 		moc_predefs.h \
 		../../../Qt5.9.4/5.9.4/clang_64/bin/moc
 	/Users/irfanali/Qt5.9.4/5.9.4/clang_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/Users/irfanali/Qt5.9.4/5.9.4/clang_64/mkspecs/macx-clang -I/Users/irfanali/Desktop/concurrency-8/abc -I/Users/irfanali/Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers -I/Users/irfanali/Qt5.9.4/5.9.4/clang_64/lib/QtGui.framework/Headers -I/Users/irfanali/Qt5.9.4/5.9.4/clang_64/lib/QtWebSockets.framework/Headers -I/Users/irfanali/Qt5.9.4/5.9.4/clang_64/lib/QtNetwork.framework/Headers -I/Users/irfanali/Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/usr/include -F/Users/irfanali/Qt5.9.4/5.9.4/clang_64/lib ../abc/screenupdate.h -o moc_screenupdate.cpp
+
+moc_mainthread.cpp: ../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/QGraphicsScene \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/qgraphicsscene.h \
+		../abc/gamestate.h \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/QPointF \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qpoint.h \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/QJsonObject \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qjsonobject.h \
+		../abc/myplayer1.h \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/QGraphicsPixmapItem \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
+		../abc/bow.h \
+		../abc/arrow.h \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qobject.h \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWebSockets.framework/Headers/QWebSocket \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWebSockets.framework/Headers/qwebsocket.h \
+		../abc/target.h \
+		../abc/score.h \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/QGraphicsTextItem \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/QThread \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qthread.h \
+		../abc/mainthread.h \
+		moc_predefs.h \
+		../../../Qt5.9.4/5.9.4/clang_64/bin/moc
+	/Users/irfanali/Qt5.9.4/5.9.4/clang_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/Users/irfanali/Qt5.9.4/5.9.4/clang_64/mkspecs/macx-clang -I/Users/irfanali/Desktop/concurrency-8/abc -I/Users/irfanali/Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers -I/Users/irfanali/Qt5.9.4/5.9.4/clang_64/lib/QtGui.framework/Headers -I/Users/irfanali/Qt5.9.4/5.9.4/clang_64/lib/QtWebSockets.framework/Headers -I/Users/irfanali/Qt5.9.4/5.9.4/clang_64/lib/QtNetwork.framework/Headers -I/Users/irfanali/Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/usr/include -F/Users/irfanali/Qt5.9.4/5.9.4/clang_64/lib ../abc/mainthread.h -o moc_mainthread.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -1042,8 +1070,6 @@ mainthread.o: ../abc/mainthread.cpp ../abc/mainthread.h \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qpoint.h \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/QJsonObject \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qjsonobject.h \
-		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/QThread \
-		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qthread.h \
 		../abc/myplayer1.h \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/QGraphicsPixmapItem \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
@@ -1056,6 +1082,8 @@ mainthread.o: ../abc/mainthread.cpp ../abc/mainthread.h \
 		../abc/target.h \
 		../abc/score.h \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/QGraphicsTextItem \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/QThread \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qthread.h \
 		../abc/scoreboard.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainthread.o ../abc/mainthread.cpp
 
@@ -1076,6 +1104,9 @@ moc_client.o: moc_client.cpp
 
 moc_screenupdate.o: moc_screenupdate.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_screenupdate.o moc_screenupdate.cpp
+
+moc_mainthread.o: moc_mainthread.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainthread.o moc_mainthread.cpp
 
 ####### Install
 

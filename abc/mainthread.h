@@ -6,9 +6,11 @@
 #include "target.h"
 #include "score.h"
 #include <QThread>
+#include <QObject>
 
-class mainThread : public QThread
+class mainThread : public QObject
 {
+    Q_OBJECT
 public:
     QGraphicsScene * scene;
     score * points;
@@ -16,6 +18,6 @@ public:
     myplayer1 * p1;
     target * t;
     mainThread(QGraphicsScene * scene_param,gamestate * state_param, score * points_param, myplayer1 * p1_param,target*t_param);
-    void run();
+    void run1();
 };
 #endif // MAINTHREAD_H
