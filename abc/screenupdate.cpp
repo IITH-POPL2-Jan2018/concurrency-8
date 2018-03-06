@@ -32,10 +32,10 @@ void screenUpdate::Update()
     p2->setPos(state->Player2Position.x(),state->Player2Position.y());
     p2->bow1->setPos(740,state->Player2Position.y() + 55 );
     p2->bow1->setRotation(state->Bow2Angle);
-    /*if(id == 1)
+    if(id == 1)
     {
         t->setPos(state->TargetPosition.x(),state->TargetPosition.y());
-    }*/
+    }
     if(state->isArrow2)
     {
         p2->player2Arrow->setPos(state->Arrow2Position.x(),state->Arrow2Position.y());

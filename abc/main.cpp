@@ -32,7 +32,7 @@ int main(int argc, char *argv[]){
     points = new score();
     myplayer1 * p1;
     target * t;
-    int x = 1;
+    int x = 0;
     if(x == 0)
     {
     QThread * thread1 = new QThread();
@@ -104,7 +104,7 @@ int main(int argc, char *argv[]){
         //thread->start();
 
         // create an item to add to the scene
-        myplayer1 * p1 = new myplayer1(state,t);
+        p1 = new myplayer1(state,t);
 
         myplayer1 * p2 = new myplayer1(1,state);
         // add the item to the scene
@@ -114,14 +114,14 @@ int main(int argc, char *argv[]){
         scene->addItem(p2->bow1);
         scene->addItem(p2->player2Arrow);
        // target * t = new target(state);
-        target * t = new target(1,state);
+        t = new target(1,state);
         scene->addItem(t);
         // make rect focusable
         p1->setFlag(QGraphicsItem::ItemIsFocusable);
         p1->setFocus();
         scoreboard * s =new scoreboard();
         scene->addItem(s);
-        points = new score();
+        //points = new score();
         scene->addItem(points);
 
         // create a view to visualize the scene
@@ -153,7 +153,7 @@ int main(int argc, char *argv[]){
         //server * GameServer = new server(scene,1234,state);
         //GameServer->startServer();
         client * GameClient  = new client(state);
-        GameClient->estServerConnection(QUrl("ws://192.168.2.34:1234"));
+        GameClient->estServerConnection(QUrl("ws://192.168.116.133:1234"));
         screenUpdate * u = new screenUpdate(scene,state,p2,1,t);
         u->startUpdate();
     }
