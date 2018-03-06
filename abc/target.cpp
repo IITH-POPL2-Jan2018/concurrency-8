@@ -30,18 +30,25 @@ target::target(int i, gamestate *state_param)
 
 void target::reset()
 {
-    if(a==1){
+    qDebug() << "i";
+    /*if(a==1){
         a = 0;
+         qDebug() << "ia";
         setRotation(0);
-    }
+    }*/
+    qDebug() << "j";
     QTime time = QTime::currentTime();
     qsrand((uint)time.msec());
+    qDebug() << "k";
     setPos(qrand()%100+350,qrand()%600);
+    qDebug() << "m";
     a = qrand()%2;
+    qDebug() << "l";
     if(a == 0)
         setRotation(0);
     else
         setRotation(180);
+    qDebug() << "n";
 }
 
 void target::move()

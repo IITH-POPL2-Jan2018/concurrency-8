@@ -12,6 +12,7 @@ class gamestate
 {
     public:
         gamestate(QGraphicsScene * scene);
+        int id;
         QGraphicsScene * stateScene;
         QPointF Player1Position;
         QPointF Player2Position;

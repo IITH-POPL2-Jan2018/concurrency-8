@@ -76,6 +76,7 @@ void arrow::move(){
     */
     qDebug() << t->x() <<t->y();
     if(pos().x()>=(t->x()-20) && pos().x()<=(t->x()+20) && pos().y()<(t->y()+20) && pos().y()>(t->y()-20)){
+        if(state->id ==1 )
             state->hit = 1;
 
             points->increase();

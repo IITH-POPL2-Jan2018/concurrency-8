@@ -36,8 +36,13 @@ void screenUpdate::Update()
     {
         t->setPos(state->TargetPosition.x(),state->TargetPosition.y());
     }
+    qDebug()<<"a";
     if(state->hit == 1)
+    {
+        qDebug()<< "c";
         t->reset();
+    }
+    qDebug()<< "b";
     if(state->isArrow2)
     {
         p2->player2Arrow->setPos(state->Arrow2Position.x(),state->Arrow2Position.y());

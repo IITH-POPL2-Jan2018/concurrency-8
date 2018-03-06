@@ -93,6 +93,7 @@ void server::processBinary(QByteArray binary)
    double targetX = 800 - message["target_posX"].toDouble();
    double targetY = message["target_posY"].toDouble();
    state->isArrow2 = message["isArrow1"].toBool();
+   state->hit = message["hit"].toInt();
     //state->isArrow2 = message["isArrow2"].toBool();
     if(state->isArrow2)
     {
