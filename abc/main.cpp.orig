@@ -19,19 +19,10 @@
 #include <QTimer>
 #include "mainthread.h"
 #include <QThread>
-#include <QMutex>
 
-<<<<<<< HEAD
-score * points ;
-<<<<<<< HEAD
-=======
 score * point1;
 score * point2;
->>>>>>> 5262092fde5ff4f4eaa4fcb90644cc5be95bd1f5
 target * t;
-=======
-QMutex mutex;
->>>>>>> fe226359e9767789bec27cd87db860d546da0c0a
 int flag;
 
 int main(int argc, char *argv[]){
@@ -46,7 +37,7 @@ int main(int argc, char *argv[]){
     scoreboard * s2 =new scoreboard();
     myplayer1 * p1;
 
-    int x = 1;
+    int x = 0;
     if(x == 0)
     {
         state->id = 0;
@@ -87,14 +78,18 @@ int main(int argc, char *argv[]){
     view->show();
     view->setFixedSize(800,600);
     scene->setSceneRect(0,0,800,600);
-    scene->setBackgroundBrush(QBrush(QImage(":/images/bg.resized.jpeg")));
+    scene->setBackgroundBrush(QBrush(QImage(":/images/bg.resized.png")));
     p1->setPos(0,200);
-    p1->bow1->setPos(60,210);
-    p2->setPos(650,200);
-    p2->bow1->setPos(740,210 +45);
+    p1->bow1->setPos(45,200);
+    p2->setPos(710,200);
+<<<<<<< HEAD
+    p2->bow1->setPos(655,200 +60);
+=======
+    p2->bow1->setPos(655,260);
+>>>>>>> f002693a51b9245f89ad0e4a7954ee2e9f928263
     p2->bow1->setRotation(180);
-    s1->setPos(200,0);
-    s2->setPos(600,0);
+    s1->setPos(150,0);
+    s2->setPos(550,0);
     t->setPos(view->width()/2,view->height()-60);
     //state->StateSet(p1,p2,t);
     state->Player1Position.setX(p1->x());
@@ -155,14 +150,14 @@ int main(int argc, char *argv[]){
         view->show();
         view->setFixedSize(800,600);
         scene->setSceneRect(0,0,800,600);
-        scene->setBackgroundBrush(QBrush(QImage(":/images/bg.resized.jpeg")));
+        scene->setBackgroundBrush(QBrush(QImage(":/images/bg.resized.png")));
         p1->setPos(0,200);
-        p1->bow1->setPos(60,210);
-        p2->setPos(650,200);
-        p2->bow1->setPos(740,210 +45);
+        p1->bow1->setPos(45,200);
+        p2->setPos(710,200);
+        p2->bow1->setPos(655,260);
         p2->bow1->setRotation(180);
-        s1->setPos(200,0);
-        s2->setPos(600,0);
+        s1->setPos(150,0);
+        s2->setPos(550,0);
         point2->setPos(400,0);
         t->setPos(view->width()/2,view->height()-60);
         //state->StateSet(p1,p2,t);
@@ -179,11 +174,7 @@ int main(int argc, char *argv[]){
         //server * GameServer = new server(scene,1234,state);
         //GameServer->startServer();
         client * GameClient  = new client(state);
-<<<<<<< HEAD
-        GameClient->estServerConnection(QUrl("ws://192.168.137.56:1234"));
-=======
-        GameClient->estServerConnection(QUrl("ws://10.42.0.246:1234"));
->>>>>>> 5262092fde5ff4f4eaa4fcb90644cc5be95bd1f5
+        GameClient->estServerConnection(QUrl("ws://192.168.43.210:1234"));
         screenUpdate * u = new screenUpdate(scene,state,p2,1,t);
         u->startUpdate();
     }
