@@ -37,7 +37,7 @@ int main(int argc, char *argv[]){
     scoreboard * s2 =new scoreboard();
     myplayer1 * p1;
 
-    int x = 1;
+    int x = 0;
     if(x == 0)
     {
         state->id = 0;
@@ -80,7 +80,7 @@ int main(int argc, char *argv[]){
     scene->setSceneRect(0,0,800,600);
     scene->setBackgroundBrush(QBrush(QImage(":/images/bg.resized.jpeg")));
     p1->setPos(0,200);
-    p1->bow1->setPos(60,210);
+    p1->bow1->setPos(45,200);
     p2->setPos(650,200);
     p2->bow1->setPos(740,210 +45);
     p2->bow1->setRotation(180);
@@ -148,9 +148,9 @@ int main(int argc, char *argv[]){
         scene->setSceneRect(0,0,800,600);
         scene->setBackgroundBrush(QBrush(QImage(":/images/bg.resized.jpeg")));
         p1->setPos(0,200);
-        p1->bow1->setPos(60,210);
+        p1->bow1->setPos(45,200);
         p2->setPos(650,200);
-        p2->bow1->setPos(740,210 +45);
+        p2->bow1->setPos(740,200+60);
         p2->bow1->setRotation(180);
         s1->setPos(200,0);
         s2->setPos(600,0);
@@ -170,7 +170,7 @@ int main(int argc, char *argv[]){
         //server * GameServer = new server(scene,1234,state);
         //GameServer->startServer();
         client * GameClient  = new client(state);
-        GameClient->estServerConnection(QUrl("ws://10.42.0.246:1234"));
+        GameClient->estServerConnection(QUrl("ws://192.168.137.122:1234"));
         screenUpdate * u = new screenUpdate(scene,state,p2,1,t);
         u->startUpdate();
     }

@@ -9,8 +9,8 @@ myplayer1::myplayer1(gamestate *state_param, target *t_param)
 {
     state = state_param;
     t = t_param;
-    QPixmap play(":/images/arrow2.png");
-    QPixmap scaled= play.scaled(QSize(150,100));
+    QPixmap play(":/images/playerleft.png");
+    QPixmap scaled= play.scaled(QSize(80,110));
     setPixmap(scaled);
     bow * b = new bow();
     state->Bow1Angle = 0;
@@ -22,8 +22,8 @@ myplayer1::myplayer1(gamestate *state_param, target *t_param)
 myplayer1::myplayer1(int i, gamestate *state_param)
 {
     state = state_param;
-    QPixmap play(":/images/arrow2_flip.png");
-    QPixmap scaled= play.scaled(QSize(150,100));
+    QPixmap play(":/images/playerright.png");
+    QPixmap scaled= play.scaled(QSize(80,110));
     setPixmap(scaled);
     bow * b = new bow();
     state->Bow1Angle = 0;

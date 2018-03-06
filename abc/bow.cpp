@@ -2,8 +2,8 @@
 
 bow::bow()
 {
-    QPixmap b(":/images/bow.png");
-    QPixmap scaled= b.scaled(QSize(70,45));
+    QPixmap b(":/images/bowleft.png");
+    QPixmap scaled= b.scaled(QSize(50,60));
     setPixmap(scaled);
     angle = 0;
 }
