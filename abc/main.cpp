@@ -37,7 +37,7 @@ int main(int argc, char *argv[]){
     scoreboard * s2 =new scoreboard();
     myplayer1 * p1;
 
-    int x = 0;
+    int x = 1;
     if(x == 0)
     {
         state->id = 0;
@@ -134,7 +134,7 @@ int main(int argc, char *argv[]){
         scoreboard * s =new scoreboard();
         scene->addItem(s1);
 
-        scene->addItem(s1);
+        scene->addItem(s2);
         //points = new score();
         scene->addItem(point1);
         scene->addItem(point2);
@@ -170,7 +170,7 @@ int main(int argc, char *argv[]){
         //server * GameServer = new server(scene,1234,state);
         //GameServer->startServer();
         client * GameClient  = new client(state);
-        GameClient->estServerConnection(QUrl("ws://192.168.43.245:1234"));
+        GameClient->estServerConnection(QUrl("ws://10.42.0.246:1234"));
         screenUpdate * u = new screenUpdate(scene,state,p2,1,t);
         u->startUpdate();
     }
