@@ -18,7 +18,7 @@ server::server(QGraphicsScene *scene_param, quint16 port_param, gamestate *state
 void server::startServer()
 {
 
-    if(server_local->listen(QHostAddress("192.168.43.245"),port))
+    if(server_local->listen(QHostAddress("10.42.0.29"),port))
     {
             qDebug() << "Server Started";
             qDebug() << server_local->serverUrl().toString();
@@ -99,7 +99,7 @@ void server::processBinary(QByteArray binary)
 
         state->Arrow2Position.setX(800 - message["arrow1_posX"].toDouble());
         state->Arrow2Position.setY(message["arrow1_posY"].toDouble() + 25);
-        if(state->Arrow2Position.x()>=(targetX-20) && state->Arrow2Position.x() <= (targetX + 20)){
+        /*if(state->Arrow2Position.x()>=(targetX-20) && state->Arrow2Position.x() <= (targetX + 20)){
             if(state->Arrow2Position.y()>=(targetY-20) && state->Arrow2Position.y() <= (targetY + 20)){
                 if(t->a==1){
                     t->a = 0;
@@ -117,7 +117,7 @@ void server::processBinary(QByteArray binary)
                     t->setRotation(180);
 
             }
-        }
+        }*/
         qDebug() << "Arrow X = " << state->Arrow2Position.x() << " Arrow Y = " << state->Arrow2Position.y();
         double angle  = message["arrow1_angle"].toDouble();
         if(angle < 0)

@@ -6,6 +6,7 @@ gamestate::gamestate(QGraphicsScene * scene)
     stateScene = scene;
     isArrow1 = false;
     isArrow2 = false;
+    hit = 0;
 }
 
 QJsonObject gamestate::getJsonObject()
@@ -27,7 +28,8 @@ QJsonObject gamestate::getJsonObject()
             {"arrow1_angle",Arrow1Angle},
             {"arrow2_angle",Arrow2Angle},
             {"bow1_angle",Bow1Angle},
-            {"bow2_angle",Bow2Angle}
+            {"bow2_angle",Bow2Angle},
+            {"hit",hit}
 
     };
 

@@ -24,6 +24,7 @@ class gamestate
         QPointF Arrow2Position;
         qreal Bow1Angle;
         qreal Bow2Angle;
+        int hit;
     QJsonObject getJsonObject();
 
 

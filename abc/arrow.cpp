@@ -32,7 +32,7 @@ arrow::arrow(gamestate *state_param, target *t_param)
 
 arrow::arrow(int i)
 {
-    QPixmap arro(":/images/arrowright.png");
+    QPixmap arro(":/images/a1.png");
     QPixmap scaled= arro.scaled(QSize(40,25));
     setPixmap(scaled);
 }
@@ -74,31 +74,34 @@ void arrow::move(){
             }
         }
     */
-    if(pos().x()>=(t->x()-20) && pos().x()<=(t->x()+20)){
-        if(pos().y()<(t->y()+20) && pos().y()>(t->y()-20)){
+    qDebug() << t->x() <<t->y();
+    if(pos().x()>=(t->x()-20) && pos().x()<=(t->x()+20) && pos().y()<(t->y()+20) && pos().y()>(t->y()-20)){
+            state->hit = 1;
+
             points->increase();
             scene()->removeItem(this);
             //lock(Acquire)
-                if(t->a==1){
+                /*if(t->a==1){
                     t->a = 0;
                     t->setRotation(0);
                 }
                 QTime time = QTime::currentTime();
                 qsrand((uint)time.msec());
-                t->setPos(qrand()%100+350,qrand()%600);
+                t->setPos(qrand()%100+350,qrand()%600);*/
+                t->reset();
                 state->TargetPosition.setX(t->x());
                 state->TargetPosition.setY(t->y());
-                t->a = qrand()%2;
+                /*t->a = qrand()%2;
                 if(t->a == 0)
                     t->setRotation(0);
                 else
-                    t->setRotation(180);
+                    t->setRotation(180);*/
             //release(lock)
                 delete this;
                 state->isArrow1=false;
                 flag=0;
                 return;
-        }
+
     }
     presentAngle = qRadiansToDegrees(qAtan((75*qSin(qDegreesToRadians(-1*angle)) - 10*time)/(75*qCos(qDegreesToRadians(angle)))));
     setRotation(-1*presentAngle);

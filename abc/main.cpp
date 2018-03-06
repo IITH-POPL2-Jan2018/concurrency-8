@@ -92,7 +92,7 @@ int main(int argc, char *argv[]){
     GameServer->startServer();
     //client * GameClient  = new client(state);
     //GameClient->estServerConnection(QUrl("ws://ip:1234"));
-    screenUpdate * u = new screenUpdate(scene,state,p2,0);
+    screenUpdate * u = new screenUpdate(scene,state,p2,0,t);
     u->startUpdate();
     }
     else
@@ -104,6 +104,7 @@ int main(int argc, char *argv[]){
         //thread->start();
 
         // create an item to add to the scene
+        t = new target(1,state);
         p1 = new myplayer1(state,t);
 
         myplayer1 * p2 = new myplayer1(1,state);
@@ -114,7 +115,7 @@ int main(int argc, char *argv[]){
         scene->addItem(p2->bow1);
         scene->addItem(p2->player2Arrow);
        // target * t = new target(state);
-        t = new target(1,state);
+
         scene->addItem(t);
         // make rect focusable
         p1->setFlag(QGraphicsItem::ItemIsFocusable);

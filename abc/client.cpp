@@ -76,4 +76,6 @@ void client::sendGameState()
     QJsonDocument message_doc(message);
     QByteArray message_byte = message_doc.toBinaryData();
     Client_local.sendBinaryMessage(message_byte);
+    if(state->hit == 1)
+        state->hit = 0;
 }

@@ -36,6 +36,8 @@ void screenUpdate::Update()
     {
         t->setPos(state->TargetPosition.x(),state->TargetPosition.y());
     }
+    if(state->hit == 1)
+        t->reset();
     if(state->isArrow2)
     {
         p2->player2Arrow->setPos(state->Arrow2Position.x(),state->Arrow2Position.y());

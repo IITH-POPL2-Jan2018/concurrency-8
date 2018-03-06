@@ -1,7 +1,7 @@
 #include "target.h"
 #include <QTimer>
 #include <QGraphicsScene>
-
+#include <QTime>
 #include <QDebug>
 
 
@@ -26,6 +26,22 @@ target::target(int i, gamestate *state_param)
     QPixmap tar(":/images/bug1.png");
     QPixmap scaled= tar.scaled(QSize(40,40));
     setPixmap(scaled);
+}
+
+void target::reset()
+{
+    if(a==1){
+        a = 0;
+        setRotation(0);
+    }
+    QTime time = QTime::currentTime();
+    qsrand((uint)time.msec());
+    setPos(qrand()%100+350,qrand()%600);
+    a = qrand()%2;
+    if(a == 0)
+        setRotation(0);
+    else
+        setRotation(180);
 }
 
 void target::move()

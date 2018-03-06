@@ -12,6 +12,7 @@ public:
     target(gamestate * state_param);
     target(int i,gamestate * state_param);
     int a;
+    void reset();
 public slots:
     void move();
 
