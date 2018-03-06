@@ -24,5 +24,9 @@
         <file>playerright.png</file>
         <file>playerleft.png</file>
         <file>bowleft.png</file>
+        <file>bg.png</file>
+        <file>bg.resized.png</file>
+        <file>arr.png</file>
+        <file>score1.png</file>
     </qresource>
 </RCC>

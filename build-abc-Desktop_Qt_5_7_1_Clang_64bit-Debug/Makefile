@@ -720,16 +720,20 @@ qrc_resources.cpp: ../abc/resources.qrc \
 		../abc/playerright.png \
 		../abc/arrow_flip.png \
 		../abc/index.png \
+		../abc/bg.png \
 		../abc/arrowright.png \
+		../abc/score1.png \
 		../abc/bowleft.png \
 		../abc/bug1.png \
 		../abc/stickman.png \
 		../abc/arrowleft.png \
 		../abc/bug.png \
+		../abc/arr.png \
 		../abc/bow_flip.png \
 		../abc/arrow2_flip.png \
 		../abc/arrow2.png \
 		../abc/arrow8.jpg \
+		../abc/bg.resized.png \
 		../abc/arrow.png \
 		../abc/Bubble.png \
 		../abc/bowright.png \

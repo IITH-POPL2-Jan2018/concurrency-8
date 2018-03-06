@@ -43,20 +43,20 @@ void myplayer1::keyPressEvent(QKeyEvent *event)
        {
            if (pos().y() > 30){
                setPos(x(),y()-10);
-               bow1->setPos(x()+60,y()+10);
+               bow1->setPos(x()+50,y()+5);
            }
        }
        else if (event->key() == Qt::Key_Down)
        {
            if (pos().y() < 470)
            setPos(x(),y()+10);
-           bow1->setPos(x()+60,y()+10);
+           bow1->setPos(x()+50,y()+5);
        }
        else if (event->key() == Qt::Key_Right)
        {
            if(bow1->angle <= 30)
            {
-               bow1->setTransformOriginPoint(0,22.5);
+               bow1->setTransformOriginPoint(0,30);
                bow1->angle += 5;
                bow1->setRotation(bow1->angle);
            }
@@ -65,7 +65,7 @@ void myplayer1::keyPressEvent(QKeyEvent *event)
        {
            if(bow1->angle >= -30)
            {
-              bow1->setTransformOriginPoint(0,22.5);
+              bow1->setTransformOriginPoint(0,30);
                bow1->angle -= 5;
                bow1->setRotation(bow1->angle);
            }
@@ -78,7 +78,7 @@ void myplayer1::keyPressEvent(QKeyEvent *event)
             a->presentAngle = bow1->angle;
             a->setRotation(a->angle);
             state->Arrow1Angle = a->angle;
-            a->setPos(bow1->x()+50*qCos(qDegreesToRadians(a->angle)),bow1->y()+50*qSin(qDegreesToRadians(a->angle)) +10);
+            a->setPos(bow1->x()+50*qCos(qDegreesToRadians(a->angle)),bow1->y()+50*qSin(qDegreesToRadians(a->angle)) +15);
             state->Arrow1Position.setX(a->x());
             state->Arrow1Position.setY(a->y());
             a->initialX = bow1->x()+50*qCos(qDegreesToRadians(a->angle));
