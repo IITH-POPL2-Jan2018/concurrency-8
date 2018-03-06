@@ -32,7 +32,8 @@ void screenUpdate::startUpdate()
 void screenUpdate::Update()
 {
     p2->setPos(state->Player2Position.x(),state->Player2Position.y());
-    p2->bow1->setPos(740,state->Player2Position.y() + 55 );
+    p2->bow1->setPos(740,state->Player2Position.y() + 20 );
+    p2->bow1->setTransformOriginPoint(0,25);
     p2->bow1->setRotation(state->Bow2Angle);
     if(id == 1)
     {
