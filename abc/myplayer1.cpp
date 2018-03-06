@@ -5,9 +5,10 @@
 #include "arrow.h"
 #include "bow.h"
 extern int flag;
-myplayer1::myplayer1(gamestate *state_param)
+myplayer1::myplayer1(gamestate *state_param, target *t_param)
 {
     state = state_param;
+    t = t_param;
     QPixmap play(":/images/arrow2.png");
     QPixmap scaled= play.scaled(QSize(150,100));
     setPixmap(scaled);
@@ -71,7 +72,7 @@ void myplayer1::keyPressEvent(QKeyEvent *event)
        }
        else if ((event->key() == Qt::Key_Space)&& flag==0)
        {
-            arrow * a = new arrow(state);
+            arrow * a = new arrow(state, t);
             state->isArrow1 = true;
             a->angle = bow1->angle;
             a->presentAngle = bow1->angle;

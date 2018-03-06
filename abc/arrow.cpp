@@ -14,9 +14,10 @@
 extern score * points;
 extern int flag;
 
-arrow::arrow(gamestate *state_param)
+arrow::arrow(gamestate *state_param, target *t_param)
 {
     state = state_param;
+    t = t_param;
     QPixmap arro(":/images/a1.png");
     QPixmap scaled= arro.scaled(QSize(40,25));
     setPixmap(scaled);
@@ -39,7 +40,7 @@ arrow::arrow(int i)
 void arrow::move(){
     time += 0.3;
     // move arrow right
-    QList<QGraphicsItem *> colliding_items = collidingItems();
+   /* QList<QGraphicsItem *> colliding_items = collidingItems();
         for (int i = 0, n = colliding_items.size(); i < n; ++i){
             if (typeid(*(colliding_items[i])) == typeid(target)){
                 target * t = dynamic_cast<target*>(colliding_items[i]);
@@ -49,11 +50,11 @@ void arrow::move(){
                 scene()->removeItem(this);
                 // delete them both
                 //delete colliding_items[i];
-                /*if(t && t->a == 1)
+                if(t && t->a == 1)
                 {
                     t->a = 0;
                     t->setRotation(0);
-                }*/
+                }
                // int random_number = (rand() % 500)+30;
                 //colliding_items[i]->setPos(400,random_number);
                 QTime time = QTime::currentTime();
@@ -72,7 +73,33 @@ void arrow::move(){
                 return;
             }
         }
-
+    */
+    if(pos().x()>=(t->x()-20) && pos().x()<=(t->x())){
+        if(pos().y()<(t->y()+20) && pos().y()>(t->y()-20)){
+            points->increase();
+            scene()->removeItem(this);
+            //lock(Acquire)
+                if(t->a==1){
+                    t->a = 0;
+                    t->setRotation(0);
+                }
+                QTime time = QTime::currentTime();
+                qsrand((uint)time.msec());
+                t->setPos(qrand()%100+350,qrand()%600);
+                state->TargetPosition.setX(t->x());
+                state->TargetPosition.setY(t->y());
+                t->a = qrand()%2;
+                if(t->a == 0)
+                    t->setRotation(0);
+                else
+                    t->setRotation(180);
+            //release(lock)
+                delete this;
+                state->isArrow1=false;
+                flag=0;
+                return;
+        }
+    }
     presentAngle = qRadiansToDegrees(qAtan((75*qSin(qDegreesToRadians(-1*angle)) - 10*time)/(75*qCos(qDegreesToRadians(angle)))));
     setRotation(-1*presentAngle);
     state->Arrow1Angle = -1*presentAngle;

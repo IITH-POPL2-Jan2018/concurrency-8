@@ -58,12 +58,14 @@ SOURCES       = ../abc/main.cpp \
 		../abc/gamestate.cpp \
 		../abc/server.cpp \
 		../abc/client.cpp \
-		../abc/screenupdate.cpp qrc_resources.cpp \
+		../abc/screenupdate.cpp \
+		../abc/mainthread.cpp qrc_resources.cpp \
 		moc_target.cpp \
 		moc_arrow.cpp \
 		moc_server.cpp \
 		moc_client.cpp \
-		moc_screenupdate.cpp
+		moc_screenupdate.cpp \
+		moc_mainthread.cpp
 OBJECTS       = main.o \
 		arrow.o \
 		myplayer1.o \
@@ -75,12 +77,14 @@ OBJECTS       = main.o \
 		server.o \
 		client.o \
 		screenupdate.o \
+		mainthread.o \
 		qrc_resources.o \
 		moc_target.o \
 		moc_arrow.o \
 		moc_server.o \
 		moc_client.o \
-		moc_screenupdate.o
+		moc_screenupdate.o \
+		moc_mainthread.o
 DIST          = ../../../Qt5.7.1/5.7/gcc_64/mkspecs/features/spec_pre.prf \
 		../../../Qt5.7.1/5.7/gcc_64/mkspecs/common/unix.conf \
 		../../../Qt5.7.1/5.7/gcc_64/mkspecs/common/linux.conf \
@@ -211,6 +215,7 @@ DIST          = ../../../Qt5.7.1/5.7/gcc_64/mkspecs/features/spec_pre.prf \
 		../../../Qt5.7.1/5.7/gcc_64/mkspecs/features/qt_config.prf \
 		../../../Qt5.7.1/5.7/gcc_64/mkspecs/linux-clang/qmake.conf \
 		../../../Qt5.7.1/5.7/gcc_64/mkspecs/features/spec_post.prf \
+		../abc/.qmake.stash \
 		../../../Qt5.7.1/5.7/gcc_64/mkspecs/features/exclusive_builds.prf \
 		../../../Qt5.7.1/5.7/gcc_64/mkspecs/features/toolchain.prf \
 		../../../Qt5.7.1/5.7/gcc_64/mkspecs/features/default_pre.prf \
@@ -238,7 +243,8 @@ DIST          = ../../../Qt5.7.1/5.7/gcc_64/mkspecs/features/spec_pre.prf \
 		../abc/gamestate.h \
 		../abc/server.h \
 		../abc/client.h \
-		../abc/screenupdate.h ../abc/main.cpp \
+		../abc/screenupdate.h \
+		../abc/mainthread.h ../abc/main.cpp \
 		../abc/arrow.cpp \
 		../abc/myplayer1.cpp \
 		../abc/target.cpp \
@@ -248,7 +254,8 @@ DIST          = ../../../Qt5.7.1/5.7/gcc_64/mkspecs/features/spec_pre.prf \
 		../abc/gamestate.cpp \
 		../abc/server.cpp \
 		../abc/client.cpp \
-		../abc/screenupdate.cpp
+		../abc/screenupdate.cpp \
+		../abc/mainthread.cpp
 QMAKE_TARGET  = abc
 DESTDIR       = 
 TARGET        = abc
@@ -390,6 +397,7 @@ Makefile: ../abc/abc.pro ../../../Qt5.7.1/5.7/gcc_64/mkspecs/linux-clang/qmake.c
 		../../../Qt5.7.1/5.7/gcc_64/mkspecs/features/qt_config.prf \
 		../../../Qt5.7.1/5.7/gcc_64/mkspecs/linux-clang/qmake.conf \
 		../../../Qt5.7.1/5.7/gcc_64/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		../../../Qt5.7.1/5.7/gcc_64/mkspecs/features/exclusive_builds.prf \
 		../../../Qt5.7.1/5.7/gcc_64/mkspecs/features/toolchain.prf \
 		../../../Qt5.7.1/5.7/gcc_64/mkspecs/features/default_pre.prf \
@@ -546,6 +554,7 @@ Makefile: ../abc/abc.pro ../../../Qt5.7.1/5.7/gcc_64/mkspecs/linux-clang/qmake.c
 ../../../Qt5.7.1/5.7/gcc_64/mkspecs/features/qt_config.prf:
 ../../../Qt5.7.1/5.7/gcc_64/mkspecs/linux-clang/qmake.conf:
 ../../../Qt5.7.1/5.7/gcc_64/mkspecs/features/spec_post.prf:
+.qmake.stash:
 ../../../Qt5.7.1/5.7/gcc_64/mkspecs/features/exclusive_builds.prf:
 ../../../Qt5.7.1/5.7/gcc_64/mkspecs/features/toolchain.prf:
 ../../../Qt5.7.1/5.7/gcc_64/mkspecs/features/default_pre.prf:
@@ -586,8 +595,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../abc/resources.qrc $(DISTDIR)/
-	$(COPY_FILE) --parents ../abc/target.h ../abc/arrow.h ../abc/myplayer1.h ../abc/score.h ../abc/scoreboard.h ../abc/bow.h ../abc/gamestate.h ../abc/server.h ../abc/client.h ../abc/screenupdate.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../abc/main.cpp ../abc/arrow.cpp ../abc/myplayer1.cpp ../abc/target.cpp ../abc/score.cpp ../abc/scoreboard.cpp ../abc/bow.cpp ../abc/gamestate.cpp ../abc/server.cpp ../abc/client.cpp ../abc/screenupdate.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../abc/target.h ../abc/arrow.h ../abc/myplayer1.h ../abc/score.h ../abc/scoreboard.h ../abc/bow.h ../abc/gamestate.h ../abc/server.h ../abc/client.h ../abc/screenupdate.h ../abc/mainthread.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../abc/main.cpp ../abc/arrow.cpp ../abc/myplayer1.cpp ../abc/target.cpp ../abc/score.cpp ../abc/scoreboard.cpp ../abc/bow.cpp ../abc/gamestate.cpp ../abc/server.cpp ../abc/client.cpp ../abc/screenupdate.cpp ../abc/mainthread.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -616,28 +625,34 @@ compiler_rcc_clean:
 	-$(DEL_FILE) qrc_resources.cpp
 qrc_resources.cpp: ../abc/resources.qrc \
 		../../../Qt5.7.1/5.7/gcc_64/bin/rcc \
+		../abc/playerleft.png \
 		../abc/bug2.jpeg \
+		../abc/playerright.png \
+		../abc/arrow_flip.png \
+		../abc/index.png \
+		../abc/arrowright.png \
+		../abc/bowleft.png \
+		../abc/bug1.png \
+		../abc/stickman.png \
+		../abc/arrowleft.png \
+		../abc/bug.png \
 		../abc/bow_flip.png \
 		../abc/arrow2_flip.png \
-		../abc/bug.png \
-		../abc/target1.png \
-		../abc/stickman.png \
-		../abc/bow.png \
-		../abc/bug1.png \
-		../abc/arrow_flip.png \
 		../abc/arrow2.png \
 		../abc/arrow8.jpg \
-		../abc/index.png \
+		../abc/arrow.png \
+		../abc/Bubble.png \
+		../abc/bowright.png \
+		../abc/target1.png \
+		../abc/bow.png \
 		../abc/score.png \
 		../abc/bg.resized.jpeg \
-		../abc/Bubble.png \
-		../abc/a1.png \
-		../abc/arrow.png
+		../abc/a1.png
 	/home/arnav/Qt5.7.1/5.7/gcc_64/bin/rcc -name resources ../abc/resources.qrc -o qrc_resources.cpp
 
-compiler_moc_header_make_all: moc_target.cpp moc_arrow.cpp moc_server.cpp moc_client.cpp moc_screenupdate.cpp
+compiler_moc_header_make_all: moc_target.cpp moc_arrow.cpp moc_server.cpp moc_client.cpp moc_screenupdate.cpp moc_mainthread.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_target.cpp moc_arrow.cpp moc_server.cpp moc_client.cpp moc_screenupdate.cpp
+	-$(DEL_FILE) moc_target.cpp moc_arrow.cpp moc_server.cpp moc_client.cpp moc_screenupdate.cpp moc_mainthread.cpp
 moc_target.cpp: ../../../Qt5.7.1/5.7/gcc_64/include/QtWidgets/QGraphicsPixmapItem \
 		../../../Qt5.7.1/5.7/gcc_64/include/QtWidgets/qgraphicsitem.h \
 		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qglobal.h \
@@ -828,6 +843,7 @@ moc_arrow.cpp: ../../../Qt5.7.1/5.7/gcc_64/include/QtWidgets/QGraphicsPixmapItem
 		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/QJsonObject \
 		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qjsonobject.h \
 		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qjsonvalue.h \
+		../abc/target.h \
 		../abc/arrow.h \
 		../../../Qt5.7.1/5.7/gcc_64/bin/moc
 	/home/arnav/Qt5.7.1/5.7/gcc_64/bin/moc $(DEFINES) -I/home/arnav/Qt5.7.1/5.7/gcc_64/mkspecs/linux-clang -I/home/arnav/Documents/POPL/abc -I/home/arnav/Qt5.7.1/5.7/gcc_64/include -I/home/arnav/Qt5.7.1/5.7/gcc_64/include/QtWidgets -I/home/arnav/Qt5.7.1/5.7/gcc_64/include/QtGui -I/home/arnav/Qt5.7.1/5.7/gcc_64/include/QtWebSockets -I/home/arnav/Qt5.7.1/5.7/gcc_64/include/QtNetwork -I/home/arnav/Qt5.7.1/5.7/gcc_64/include/QtCore -I. -I/usr/include/c++/7.2.0 -I/usr/include/x86_64-linux-gnu/c++/7.2.0 -I/usr/include/c++/7.2.0/backward -I/usr/include/clang/4.0.1/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../abc/arrow.h -o moc_arrow.cpp
@@ -1179,6 +1195,7 @@ moc_screenupdate.cpp: ../../../Qt5.7.1/5.7/gcc_64/include/QtWidgets/QGraphicsSce
 		../abc/bow.h \
 		../abc/arrow.h \
 		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/QObject \
+		../abc/target.h \
 		../../../Qt5.7.1/5.7/gcc_64/include/QtWebSockets/QWebSocket \
 		../../../Qt5.7.1/5.7/gcc_64/include/QtWebSockets/qwebsocket.h \
 		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/QUrl \
@@ -1207,10 +1224,142 @@ moc_screenupdate.cpp: ../../../Qt5.7.1/5.7/gcc_64/include/QtWidgets/QGraphicsSce
 		../../../Qt5.7.1/5.7/gcc_64/include/QtNetwork/qtcpsocket.h \
 		../../../Qt5.7.1/5.7/gcc_64/include/QtWebSockets/qwebsockets_global.h \
 		../../../Qt5.7.1/5.7/gcc_64/include/QtWebSockets/qwebsocketprotocol.h \
-		../abc/target.h \
 		../abc/screenupdate.h \
 		../../../Qt5.7.1/5.7/gcc_64/bin/moc
 	/home/arnav/Qt5.7.1/5.7/gcc_64/bin/moc $(DEFINES) -I/home/arnav/Qt5.7.1/5.7/gcc_64/mkspecs/linux-clang -I/home/arnav/Documents/POPL/abc -I/home/arnav/Qt5.7.1/5.7/gcc_64/include -I/home/arnav/Qt5.7.1/5.7/gcc_64/include/QtWidgets -I/home/arnav/Qt5.7.1/5.7/gcc_64/include/QtGui -I/home/arnav/Qt5.7.1/5.7/gcc_64/include/QtWebSockets -I/home/arnav/Qt5.7.1/5.7/gcc_64/include/QtNetwork -I/home/arnav/Qt5.7.1/5.7/gcc_64/include/QtCore -I. -I/usr/include/c++/7.2.0 -I/usr/include/x86_64-linux-gnu/c++/7.2.0 -I/usr/include/c++/7.2.0/backward -I/usr/include/clang/4.0.1/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../abc/screenupdate.h -o moc_screenupdate.cpp
+
+moc_mainthread.cpp: ../../../Qt5.7.1/5.7/gcc_64/include/QtWidgets/QGraphicsScene \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtWidgets/qgraphicsscene.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qobject.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qobjectdefs.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qnamespace.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qglobal.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qconfig.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qfeatures.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qsystemdetection.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qprocessordetection.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qcompilerdetection.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qtypeinfo.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qtypetraits.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qisenum.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qsysinfo.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qlogging.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qflags.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qatomic.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qbasicatomic.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qatomic_bootstrap.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qgenericatomic.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qatomic_cxx11.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qatomic_msvc.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qglobalstatic.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qmutex.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qnumeric.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qversiontagging.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qstring.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qchar.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qbytearray.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qrefcount.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qarraydata.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qstringbuilder.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qlist.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qalgorithms.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qiterator.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qhashfunctions.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qpair.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qbytearraylist.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qstringlist.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qregexp.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qstringmatcher.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qcoreevent.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qscopedpointer.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qmetatype.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qvarlengtharray.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qcontainerfwd.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qobject_impl.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qpoint.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qrect.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qmargins.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qsize.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtGui/qbrush.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qvector.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtGui/qcolor.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtGui/qrgb.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtGui/qrgba64.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtGui/qmatrix.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtGui/qpolygon.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtGui/qregion.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtGui/qwindowdefs.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtGui/qwindowdefs_win.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qdatastream.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qiodevice.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qline.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtGui/qtransform.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtGui/qpainterpath.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtGui/qimage.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtGui/qpaintdevice.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtGui/qpixelformat.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtGui/qpixmap.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qsharedpointer.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qshareddata.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qhash.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtGui/qfont.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtGui/qpen.h \
+		../abc/gamestate.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/QPointF \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/QJsonObject \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qjsonobject.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qjsonvalue.h \
+		../abc/myplayer1.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtWidgets/QGraphicsPixmapItem \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtWidgets/qgraphicsitem.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qvariant.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qmap.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qdebug.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qtextstream.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qlocale.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qset.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qcontiguouscache.h \
+		../abc/bow.h \
+		../abc/arrow.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/QObject \
+		../abc/target.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtWebSockets/QWebSocket \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtWebSockets/qwebsocket.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/QUrl \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qurl.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qurlquery.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtNetwork/QAbstractSocket \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtNetwork/qabstractsocket.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtNetwork/QNetworkRequest \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtNetwork/qnetworkrequest.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/QSharedDataPointer \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/QString \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/QVariant \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtNetwork/QNetworkProxy \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtNetwork/qnetworkproxy.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtNetwork/qhostaddress.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtNetwork/QSslError \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtNetwork/qsslerror.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtNetwork/qsslcertificate.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qcryptographichash.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qdatetime.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtNetwork/qssl.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/QFlags \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtNetwork/QSslConfiguration \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtNetwork/qsslconfiguration.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtNetwork/qsslsocket.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtNetwork/qtcpsocket.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtWebSockets/qwebsockets_global.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtWebSockets/qwebsocketprotocol.h \
+		../abc/score.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtWidgets/QGraphicsTextItem \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/QThread \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qthread.h \
+		../abc/mainthread.h \
+		../../../Qt5.7.1/5.7/gcc_64/bin/moc
+	/home/arnav/Qt5.7.1/5.7/gcc_64/bin/moc $(DEFINES) -I/home/arnav/Qt5.7.1/5.7/gcc_64/mkspecs/linux-clang -I/home/arnav/Documents/POPL/abc -I/home/arnav/Qt5.7.1/5.7/gcc_64/include -I/home/arnav/Qt5.7.1/5.7/gcc_64/include/QtWidgets -I/home/arnav/Qt5.7.1/5.7/gcc_64/include/QtGui -I/home/arnav/Qt5.7.1/5.7/gcc_64/include/QtWebSockets -I/home/arnav/Qt5.7.1/5.7/gcc_64/include/QtNetwork -I/home/arnav/Qt5.7.1/5.7/gcc_64/include/QtCore -I. -I/usr/include/c++/7.2.0 -I/usr/include/x86_64-linux-gnu/c++/7.2.0 -I/usr/include/c++/7.2.0/backward -I/usr/include/clang/4.0.1/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../abc/mainthread.h -o moc_mainthread.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -1394,7 +1543,10 @@ main.o: ../abc/main.cpp ../../../Qt5.7.1/5.7/gcc_64/include/QtWidgets/QApplicati
 		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qjsondocument.h \
 		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/QTimer \
 		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qtimer.h \
-		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qbasictimer.h
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qbasictimer.h \
+		../abc/mainthread.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/QThread \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qthread.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../abc/main.cpp
 
 arrow.o: ../abc/arrow.cpp ../abc/arrow.h \
@@ -1491,6 +1643,7 @@ arrow.o: ../abc/arrow.cpp ../abc/arrow.h \
 		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/QJsonObject \
 		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qjsonobject.h \
 		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qjsonvalue.h \
+		../abc/target.h \
 		../abc/score.h \
 		../../../Qt5.7.1/5.7/gcc_64/include/QtWidgets/QGraphicsTextItem \
 		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/QTimer \
@@ -1500,7 +1653,6 @@ arrow.o: ../abc/arrow.cpp ../abc/arrow.h \
 		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qdatetime.h \
 		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/QList \
 		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qmath.h \
-		../abc/target.h \
 		../abc/myplayer1.h \
 		../abc/bow.h \
 		../../../Qt5.7.1/5.7/gcc_64/include/QtWebSockets/QWebSocket \
@@ -1629,6 +1781,7 @@ myplayer1.o: ../abc/myplayer1.cpp ../abc/myplayer1.h \
 		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/QJsonObject \
 		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qjsonobject.h \
 		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qjsonvalue.h \
+		../abc/target.h \
 		../../../Qt5.7.1/5.7/gcc_64/include/QtWebSockets/QWebSocket \
 		../../../Qt5.7.1/5.7/gcc_64/include/QtWebSockets/qwebsocket.h \
 		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/QUrl \
@@ -2471,6 +2624,7 @@ screenupdate.o: ../abc/screenupdate.cpp ../abc/screenupdate.h \
 		../abc/bow.h \
 		../abc/arrow.h \
 		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/QObject \
+		../abc/target.h \
 		../../../Qt5.7.1/5.7/gcc_64/include/QtWebSockets/QWebSocket \
 		../../../Qt5.7.1/5.7/gcc_64/include/QtWebSockets/qwebsocket.h \
 		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/QUrl \
@@ -2499,11 +2653,143 @@ screenupdate.o: ../abc/screenupdate.cpp ../abc/screenupdate.h \
 		../../../Qt5.7.1/5.7/gcc_64/include/QtNetwork/qtcpsocket.h \
 		../../../Qt5.7.1/5.7/gcc_64/include/QtWebSockets/qwebsockets_global.h \
 		../../../Qt5.7.1/5.7/gcc_64/include/QtWebSockets/qwebsocketprotocol.h \
-		../abc/target.h \
 		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/QTimer \
 		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qtimer.h \
 		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qbasictimer.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o screenupdate.o ../abc/screenupdate.cpp
+
+mainthread.o: ../abc/mainthread.cpp ../abc/mainthread.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtWidgets/QGraphicsScene \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtWidgets/qgraphicsscene.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qobject.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qobjectdefs.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qnamespace.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qglobal.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qconfig.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qfeatures.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qsystemdetection.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qprocessordetection.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qcompilerdetection.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qtypeinfo.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qtypetraits.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qisenum.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qsysinfo.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qlogging.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qflags.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qatomic.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qbasicatomic.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qatomic_bootstrap.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qgenericatomic.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qatomic_cxx11.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qatomic_msvc.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qglobalstatic.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qmutex.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qnumeric.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qversiontagging.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qstring.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qchar.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qbytearray.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qrefcount.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qarraydata.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qstringbuilder.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qlist.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qalgorithms.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qiterator.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qhashfunctions.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qpair.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qbytearraylist.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qstringlist.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qregexp.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qstringmatcher.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qcoreevent.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qscopedpointer.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qmetatype.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qvarlengtharray.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qcontainerfwd.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qobject_impl.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qpoint.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qrect.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qmargins.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qsize.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtGui/qbrush.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qvector.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtGui/qcolor.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtGui/qrgb.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtGui/qrgba64.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtGui/qmatrix.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtGui/qpolygon.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtGui/qregion.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtGui/qwindowdefs.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtGui/qwindowdefs_win.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qdatastream.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qiodevice.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qline.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtGui/qtransform.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtGui/qpainterpath.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtGui/qimage.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtGui/qpaintdevice.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtGui/qpixelformat.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtGui/qpixmap.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qsharedpointer.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qshareddata.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qhash.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtGui/qfont.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtGui/qpen.h \
+		../abc/gamestate.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/QPointF \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/QJsonObject \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qjsonobject.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qjsonvalue.h \
+		../abc/myplayer1.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtWidgets/QGraphicsPixmapItem \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtWidgets/qgraphicsitem.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qvariant.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qmap.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qdebug.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qtextstream.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qlocale.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qset.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qcontiguouscache.h \
+		../abc/bow.h \
+		../abc/arrow.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/QObject \
+		../abc/target.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtWebSockets/QWebSocket \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtWebSockets/qwebsocket.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/QUrl \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qurl.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qurlquery.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtNetwork/QAbstractSocket \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtNetwork/qabstractsocket.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtNetwork/QNetworkRequest \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtNetwork/qnetworkrequest.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/QSharedDataPointer \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/QString \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/QVariant \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtNetwork/QNetworkProxy \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtNetwork/qnetworkproxy.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtNetwork/qhostaddress.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtNetwork/QSslError \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtNetwork/qsslerror.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtNetwork/qsslcertificate.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qcryptographichash.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qdatetime.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtNetwork/qssl.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/QFlags \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtNetwork/QSslConfiguration \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtNetwork/qsslconfiguration.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtNetwork/qsslsocket.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtNetwork/qtcpsocket.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtWebSockets/qwebsockets_global.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtWebSockets/qwebsocketprotocol.h \
+		../abc/score.h \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtWidgets/QGraphicsTextItem \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/QThread \
+		../../../Qt5.7.1/5.7/gcc_64/include/QtCore/qthread.h \
+		../abc/scoreboard.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainthread.o ../abc/mainthread.cpp
 
 qrc_resources.o: qrc_resources.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_resources.o qrc_resources.cpp
@@ -2522,6 +2808,9 @@ moc_client.o: moc_client.cpp
 
 moc_screenupdate.o: moc_screenupdate.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_screenupdate.o moc_screenupdate.cpp
+
+moc_mainthread.o: moc_mainthread.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainthread.o moc_mainthread.cpp
 
 ####### Install
 
