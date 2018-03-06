@@ -82,11 +82,9 @@ int main(int argc, char *argv[]){
     p1->setPos(0,200);
     p1->bow1->setPos(45,200);
     p2->setPos(710,200);
-<<<<<<< HEAD
-    p2->bow1->setPos(655,200 +60);
-=======
+
     p2->bow1->setPos(655,260);
->>>>>>> f002693a51b9245f89ad0e4a7954ee2e9f928263
+
     p2->bow1->setRotation(180);
     s1->setPos(150,0);
     s2->setPos(550,0);

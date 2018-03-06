@@ -31,11 +31,11 @@ target::target(int i, gamestate *state_param)
 void target::reset()
 {
     qDebug() << "i";
-    /*if(a==1){
+    if(a==1){
         a = 0;
-         qDebug() << "ia";
+        // qDebug() << "ia";
         setRotation(0);
-    }*/
+    }
     qDebug() << "j";
     QTime time = QTime::currentTime();
     qsrand((uint)time.msec());
