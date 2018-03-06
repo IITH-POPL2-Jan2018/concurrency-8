@@ -11,7 +11,8 @@
 #include <typeinfo>
 #include <QDebug>
 
-extern score * points;
+extern score * point1;
+extern score * point2;
 extern int flag;
 
 arrow::arrow(gamestate *state_param, target *t_param)
@@ -77,9 +78,12 @@ void arrow::move(){
     qDebug() << t->x() <<t->y();
     if(pos().x()>=(t->x()-20) && pos().x()<=(t->x()+20) && pos().y()<(t->y()+20) && pos().y()>(t->y()-20)){
         if(state->id ==1 )
+        {
             state->hit = 1;
+        }
 
-            points->increase();
+            point1->increase();
+            state->points1 ++;
             scene()->removeItem(this);
             //lock(Acquire)
                 /*if(t->a==1){

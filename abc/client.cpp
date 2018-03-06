@@ -67,6 +67,7 @@ void client::processBinary(QByteArray message_bytes)
     else
         state->Bow2Angle = 180 - angle;
     //state->Bow2Angle = (message["bow2_angle"].toDouble());
+    state->points2 = message["points1"].toInt();
 }
 
 void client::sendGameState()

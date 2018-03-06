@@ -1,6 +1,8 @@
 #include "screenupdate.h"
 #include <QTimer>
-
+#include "score.h"
+extern score * point1;
+extern score * point2;
 screenUpdate::screenUpdate(QGraphicsScene *scene_param, gamestate *state_param , myplayer1 * p2_param , int i)
 {
     scene_local = scene_param;
@@ -54,6 +56,10 @@ void screenUpdate::Update()
     {
         if(p2->player2Arrow->isVisible())
             p2->player2Arrow->hide();
+    }
+    if(state->points2 == point2->getScore() + 1)
+    {
+        point2->increase();
     }
 }
 

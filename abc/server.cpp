@@ -18,7 +18,7 @@ server::server(QGraphicsScene *scene_param, quint16 port_param, gamestate *state
 void server::startServer()
 {
 
-    if(server_local->listen(QHostAddress("10.42.0.29"),port))
+    if(server_local->listen(QHostAddress("192.168.137.56"),port))
     {
             qDebug() << "Server Started";
             qDebug() << server_local->serverUrl().toString();
@@ -139,6 +139,8 @@ void server::processBinary(QByteArray binary)
         state->Bow2Angle = 180 - angle;
 
     //state->Bow2Angle = (message["bow2_angle"].toDouble());
+    state->points2 = message["points1"].toInt();
+    qDebug() << state->points2;
 
 }
 

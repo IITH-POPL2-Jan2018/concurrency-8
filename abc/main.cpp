@@ -20,7 +20,8 @@
 #include "mainthread.h"
 #include <QThread>
 
-score * points ;
+score * point1;
+score * point2;
 target * t;
 int flag;
 
@@ -30,7 +31,10 @@ int main(int argc, char *argv[]){
     // create a scene
     QGraphicsScene * scene = new QGraphicsScene();
     gamestate * state = new gamestate(scene);
-    points = new score();
+    point1 = new score();
+    point2 = new score();
+    scoreboard * s1 =new scoreboard();
+    scoreboard * s2 =new scoreboard();
     myplayer1 * p1;
 
     int x = 0;
@@ -60,10 +64,12 @@ int main(int argc, char *argv[]){
     // make rect focusable
     p1->setFlag(QGraphicsItem::ItemIsFocusable);
     p1->setFocus();
-    scoreboard * s =new scoreboard();
-    scene->addItem(s);
-    points = new score();
-    scene->addItem(points);
+
+    scene->addItem(s1);
+    scene->addItem(s2);
+    scene->addItem(point1);
+    scene->addItem(point2);
+    point2->setPos(400,0);
 
     // create a view to visualize the scene
     QGraphicsView * view = new QGraphicsView(scene);
@@ -78,7 +84,8 @@ int main(int argc, char *argv[]){
     p2->setPos(650,200);
     p2->bow1->setPos(740,210 +45);
     p2->bow1->setRotation(180);
-    s->setPos(200,0);
+    s1->setPos(200,0);
+    s2->setPos(600,0);
     t->setPos(view->width()/2,view->height()-60);
     //state->StateSet(p1,p2,t);
     state->Player1Position.setX(p1->x());
@@ -125,9 +132,12 @@ int main(int argc, char *argv[]){
         p1->setFlag(QGraphicsItem::ItemIsFocusable);
         p1->setFocus();
         scoreboard * s =new scoreboard();
-        scene->addItem(s);
+        scene->addItem(s1);
+
+        scene->addItem(s1);
         //points = new score();
-        scene->addItem(points);
+        scene->addItem(point1);
+        scene->addItem(point2);
 
         // create a view to visualize the scene
         QGraphicsView * view = new QGraphicsView(scene);
@@ -142,7 +152,9 @@ int main(int argc, char *argv[]){
         p2->setPos(650,200);
         p2->bow1->setPos(740,210 +45);
         p2->bow1->setRotation(180);
-        s->setPos(200,0);
+        s1->setPos(200,0);
+        s2->setPos(600,0);
+        point2->setPos(400,0);
         t->setPos(view->width()/2,view->height()-60);
         //state->StateSet(p1,p2,t);
         state->Player1Position.setX(p1->x());
