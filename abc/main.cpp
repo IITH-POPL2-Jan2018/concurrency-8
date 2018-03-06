@@ -32,7 +32,7 @@ int main(int argc, char *argv[]){
     points = new score();
     myplayer1 * p1;
     target * t;
-    int x = 0;
+    int x = 1;
     if(x == 0)
     {
     QThread * thread1 = new QThread();
@@ -153,7 +153,7 @@ int main(int argc, char *argv[]){
         //server * GameServer = new server(scene,1234,state);
         //GameServer->startServer();
         client * GameClient  = new client(state);
-        GameClient->estServerConnection(QUrl("ws://192.168.116.133:1234"));
+        GameClient->estServerConnection(QUrl("ws://192.168.2.34:1234"));
         screenUpdate * u = new screenUpdate(scene,state,p2,1,t);
         u->startUpdate();
     }
