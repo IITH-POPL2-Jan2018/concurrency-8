@@ -6,7 +6,7 @@
 extern QMutex mutex;
 extern score * point1;
 extern score * point2;
-screenUpdate::screenUpdate(QGraphicsScene *scene_param, gamestate *state_param , myplayer1 * p2_param , int i)
+/*screenUpdate::screenUpdate(QGraphicsScene *scene_param, gamestate *state_param , myplayer1 * p2_param , int i)
 {
     scene_local = scene_param;
     state = state_param;
@@ -14,7 +14,7 @@ screenUpdate::screenUpdate(QGraphicsScene *scene_param, gamestate *state_param ,
    // p1 = p1_param;
     p2 = p2_param;
    // t = t_param;
-}
+}*/
 screenUpdate::screenUpdate(QGraphicsScene *scene_param, gamestate *state_param , myplayer1 * p2_param , int i, target *t_param)
 {
     scene_local = scene_param;
@@ -38,11 +38,12 @@ void screenUpdate::Update()
     p2->bow1->setPos(740,state->Player2Position.y() + 20 );
     p2->bow1->setTransformOriginPoint(0,25);
     p2->bow1->setRotation(state->Bow2Angle);
+
     if(id == 1)
     {
         t->setPos(state->TargetPosition.x(),state->TargetPosition.y());
     }
-    //qDebug()<<"a";
+
     mutex.lock();
     if(state->hit == 1)
     {
@@ -50,7 +51,7 @@ void screenUpdate::Update()
         t->reset();
     }
     mutex.unlock();
-    //qDebug()<< "b";
+
     if(state->isArrow2)
     {
         p2->player2Arrow->setPos(state->Arrow2Position.x(),state->Arrow2Position.y());
