@@ -51,14 +51,10 @@ OBJECTS_DIR   = ./
 ####### Files
 
 SOURCES       = ../TestWidget/main.cpp \
-		../TestWidget/mainwindow.cpp \
-		../TestWidget/test.cpp moc_mainwindow.cpp \
-		moc_test.cpp
+		../TestWidget/mainwindow.cpp moc_mainwindow.cpp
 OBJECTS       = main.o \
 		mainwindow.o \
-		test.o \
-		moc_mainwindow.o \
-		moc_test.o
+		moc_mainwindow.o
 DIST          = ../../../Qt5.9.4/5.9.4/clang_64/mkspecs/features/spec_pre.prf \
 		../../../Qt5.9.4/5.9.4/clang_64/mkspecs/qdevice.pri \
 		../../../Qt5.9.4/5.9.4/clang_64/mkspecs/features/device_config.prf \
@@ -221,10 +217,8 @@ DIST          = ../../../Qt5.9.4/5.9.4/clang_64/mkspecs/features/spec_pre.prf \
 		../../../Qt5.9.4/5.9.4/clang_64/mkspecs/features/exceptions.prf \
 		../../../Qt5.9.4/5.9.4/clang_64/mkspecs/features/yacc.prf \
 		../../../Qt5.9.4/5.9.4/clang_64/mkspecs/features/lex.prf \
-		../TestWidget/StartSCreen.pro ../TestWidget/mainwindow.h \
-		../TestWidget/test.h ../TestWidget/main.cpp \
-		../TestWidget/mainwindow.cpp \
-		../TestWidget/test.cpp
+		../TestWidget/StartSCreen.pro ../TestWidget/mainwindow.h ../TestWidget/main.cpp \
+		../TestWidget/mainwindow.cpp
 QMAKE_TARGET  = StartSCreen
 DESTDIR       = 
 TARGET        = StartSCreen.app/Contents/MacOS/StartSCreen
@@ -605,8 +599,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../../../Qt5.9.4/5.9.4/clang_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../TestWidget/mainwindow.h ../TestWidget/test.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../TestWidget/main.cpp ../TestWidget/mainwindow.cpp ../TestWidget/test.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../TestWidget/mainwindow.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../TestWidget/main.cpp ../TestWidget/mainwindow.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../TestWidget/mainwindow.ui $(DISTDIR)/
 
 
@@ -639,24 +633,15 @@ compiler_moc_predefs_clean:
 moc_predefs.h: ../../../Qt5.9.4/5.9.4/clang_64/mkspecs/features/data/dummy.cpp
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ -pipe -stdlib=libc++ -g -std=gnu++11 $(EXPORT_ARCH_ARGS) -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk -mmacosx-version-min=10.10 -Wall -W -dM -E -o moc_predefs.h ../../../Qt5.9.4/5.9.4/clang_64/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_mainwindow.cpp moc_test.cpp
+compiler_moc_header_make_all: moc_mainwindow.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_mainwindow.cpp moc_test.cpp
+	-$(DEL_FILE) moc_mainwindow.cpp
 moc_mainwindow.cpp: ../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
 		../TestWidget/mainwindow.h \
 		moc_predefs.h \
 		../../../Qt5.9.4/5.9.4/clang_64/bin/moc
 	/Users/irfanali/Qt5.9.4/5.9.4/clang_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/Users/irfanali/Qt5.9.4/5.9.4/clang_64/mkspecs/macx-clang -I/Users/irfanali/Desktop/concurrency-8/TestWidget -I/Users/irfanali/Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers -I/Users/irfanali/Qt5.9.4/5.9.4/clang_64/lib/QtGui.framework/Headers -I/Users/irfanali/Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/usr/include -F/Users/irfanali/Qt5.9.4/5.9.4/clang_64/lib ../TestWidget/mainwindow.h -o moc_mainwindow.cpp
-
-moc_test.cpp: ../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/QObject \
-		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qobject.h \
-		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/QGraphicsScene \
-		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/qgraphicsscene.h \
-		../TestWidget/test.h \
-		moc_predefs.h \
-		../../../Qt5.9.4/5.9.4/clang_64/bin/moc
-	/Users/irfanali/Qt5.9.4/5.9.4/clang_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/Users/irfanali/Qt5.9.4/5.9.4/clang_64/mkspecs/macx-clang -I/Users/irfanali/Desktop/concurrency-8/TestWidget -I/Users/irfanali/Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers -I/Users/irfanali/Qt5.9.4/5.9.4/clang_64/lib/QtGui.framework/Headers -I/Users/irfanali/Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/usr/include -F/Users/irfanali/Qt5.9.4/5.9.4/clang_64/lib ../TestWidget/test.h -o moc_test.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -683,16 +668,7 @@ main.o: ../TestWidget/main.cpp ../TestWidget/mainwindow.h \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/QApplication \
-		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/qapplication.h \
-		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/QGraphicsScene \
-		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/qgraphicsscene.h \
-		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/QGraphicsView \
-		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/qgraphicsview.h \
-		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/QLabel \
-		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/qlabel.h \
-		../TestWidget/test.h \
-		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/QObject \
-		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qobject.h
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/qapplication.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../TestWidget/main.cpp
 
 mainwindow.o: ../TestWidget/mainwindow.cpp ../TestWidget/mainwindow.h \
@@ -701,20 +677,8 @@ mainwindow.o: ../TestWidget/mainwindow.cpp ../TestWidget/mainwindow.h \
 		ui_mainwindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../TestWidget/mainwindow.cpp
 
-test.o: ../TestWidget/test.cpp ../TestWidget/test.h \
-		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/QObject \
-		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qobject.h \
-		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/QGraphicsScene \
-		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/qgraphicsscene.h \
-		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/QLabel \
-		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/qlabel.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o test.o ../TestWidget/test.cpp
-
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp
-
-moc_test.o: moc_test.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_test.o moc_test.cpp
 
 ####### Install
 

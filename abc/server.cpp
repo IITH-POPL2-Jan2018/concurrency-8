@@ -18,7 +18,7 @@ server::server(QGraphicsScene *scene_param, quint16 port_param, gamestate *state
 void server::startServer()
 {
 
-    if(server_local->listen(QHostAddress("192.168.43.210"),port))
+    if(server_local->listen(QHostAddress("192.168.116.133"),port))
     {
             qDebug() << "Server Started";
             qDebug() << server_local->serverUrl().toString();

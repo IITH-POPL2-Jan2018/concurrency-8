@@ -693,24 +693,52 @@ qrc_resources.cpp: ../abc/resources.qrc \
 		../abc/playerright.png \
 		../abc/arrow_flip.png \
 		../abc/index.png \
+		../abc/bg.png \
 		../abc/arrowright.png \
+		../abc/score1.png \
 		../abc/bowleft.png \
 		../abc/bug1.png \
 		../abc/stickman.png \
 		../abc/arrowleft.png \
 		../abc/bug.png \
+		../abc/arr.png \
 		../abc/bow_flip.png \
 		../abc/arrow2_flip.png \
 		../abc/arrow2.png \
 		../abc/arrow8.jpg \
+		../abc/bg.resized.png \
 		../abc/arrow.png \
 		../abc/Bubble.png \
 		../abc/bowright.png \
+		../abc/server.cpp \
 		../abc/target1.png \
 		../abc/bow.png \
 		../abc/score.png \
 		../abc/bg.resized.jpeg \
-		../abc/a1.png
+		../abc/a1.png \
+		../abc/server.h \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWebSockets.framework/Headers/QWebSocketServer \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWebSockets.framework/Headers/qwebsocketserver.h \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWebSockets.framework/Headers/QWebSocket \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWebSockets.framework/Headers/qwebsocket.h \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qobject.h \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/QGraphicsScene \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/qgraphicsscene.h \
+		../abc/gamestate.h \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/QPointF \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qpoint.h \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/QJsonObject \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qjsonobject.h \
+		../abc/target.h \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/QGraphicsPixmapItem \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/QDebug \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qdebug.h \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/QTimer \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qtimer.h \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/QJsonDocument \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qjsondocument.h
 	/Users/irfanali/Qt5.9.4/5.9.4/clang_64/bin/rcc -name resources ../abc/resources.qrc -o qrc_resources.cpp
 
 compiler_moc_predefs_make_all: moc_predefs.h
@@ -749,6 +777,7 @@ moc_arrow.cpp: ../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/Q
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qpoint.h \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/QJsonObject \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qjsonobject.h \
+		../abc/target.h \
 		../abc/arrow.h \
 		moc_predefs.h \
 		../../../Qt5.9.4/5.9.4/clang_64/bin/moc
@@ -767,6 +796,9 @@ moc_server.cpp: ../../../Qt5.9.4/5.9.4/clang_64/lib/QtWebSockets.framework/Heade
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qpoint.h \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/QJsonObject \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qjsonobject.h \
+		../abc/target.h \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/QGraphicsPixmapItem \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
 		../abc/server.h \
 		moc_predefs.h \
 		../../../Qt5.9.4/5.9.4/clang_64/bin/moc
@@ -804,9 +836,9 @@ moc_screenupdate.cpp: ../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/He
 		../abc/arrow.h \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/QObject \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qobject.h \
+		../abc/target.h \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWebSockets.framework/Headers/QWebSocket \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWebSockets.framework/Headers/qwebsocket.h \
-		../abc/target.h \
 		../abc/screenupdate.h \
 		moc_predefs.h \
 		../../../Qt5.9.4/5.9.4/clang_64/bin/moc
@@ -826,9 +858,9 @@ moc_mainthread.cpp: ../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Head
 		../abc/arrow.h \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/QObject \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qobject.h \
+		../abc/target.h \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWebSockets.framework/Headers/QWebSocket \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWebSockets.framework/Headers/qwebsocket.h \
-		../abc/target.h \
 		../abc/score.h \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/QGraphicsTextItem \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/QThread \
@@ -897,7 +929,9 @@ main.o: ../abc/main.cpp ../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qtimer.h \
 		../abc/mainthread.h \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/QThread \
-		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qthread.h
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qthread.h \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/QMutex \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qmutex.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../abc/main.cpp
 
 arrow.o: ../abc/arrow.cpp ../abc/arrow.h \
@@ -912,6 +946,7 @@ arrow.o: ../abc/arrow.cpp ../abc/arrow.h \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qpoint.h \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/QJsonObject \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qjsonobject.h \
+		../abc/target.h \
 		../abc/score.h \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/QGraphicsTextItem \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/QTimer \
@@ -921,13 +956,14 @@ arrow.o: ../abc/arrow.cpp ../abc/arrow.h \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtGui.framework/Headers/QList \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtGui.framework/Headers/qevent.h \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qmath.h \
-		../abc/target.h \
 		../abc/myplayer1.h \
 		../abc/bow.h \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWebSockets.framework/Headers/QWebSocket \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWebSockets.framework/Headers/qwebsocket.h \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/QDebug \
-		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qdebug.h
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qdebug.h \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/QMutex \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qmutex.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o arrow.o ../abc/arrow.cpp
 
 myplayer1.o: ../abc/myplayer1.cpp ../abc/myplayer1.h \
@@ -944,6 +980,7 @@ myplayer1.o: ../abc/myplayer1.cpp ../abc/myplayer1.h \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qpoint.h \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/QJsonObject \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qjsonobject.h \
+		../abc/target.h \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWebSockets.framework/Headers/QWebSocket \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWebSockets.framework/Headers/qwebsocket.h \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtGui.framework/Headers/QKeyEvent \
@@ -965,8 +1002,12 @@ target.o: ../abc/target.cpp ../abc/target.h \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qobject.h \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/QTimer \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qtimer.h \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/QTime \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qdatetime.h \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/QDebug \
-		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qdebug.h
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qdebug.h \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/QMutex \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qmutex.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o target.o ../abc/target.cpp
 
 score.o: ../abc/score.cpp ../abc/score.h \
@@ -1012,6 +1053,9 @@ server.o: ../abc/server.cpp ../abc/server.h \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qpoint.h \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/QJsonObject \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qjsonobject.h \
+		../abc/target.h \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/QGraphicsPixmapItem \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/QDebug \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qdebug.h \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/QTimer \
@@ -1055,11 +1099,15 @@ screenupdate.o: ../abc/screenupdate.cpp ../abc/screenupdate.h \
 		../abc/arrow.h \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/QObject \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qobject.h \
+		../abc/target.h \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWebSockets.framework/Headers/QWebSocket \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWebSockets.framework/Headers/qwebsocket.h \
-		../abc/target.h \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/QTimer \
-		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qtimer.h
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qtimer.h \
+		../abc/score.h \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/QGraphicsTextItem \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/QMutex \
+		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qmutex.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o screenupdate.o ../abc/screenupdate.cpp
 
 mainthread.o: ../abc/mainthread.cpp ../abc/mainthread.h \
@@ -1077,9 +1125,9 @@ mainthread.o: ../abc/mainthread.cpp ../abc/mainthread.h \
 		../abc/arrow.h \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/QObject \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/qobject.h \
+		../abc/target.h \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWebSockets.framework/Headers/QWebSocket \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWebSockets.framework/Headers/qwebsocket.h \
-		../abc/target.h \
 		../abc/score.h \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtWidgets.framework/Headers/QGraphicsTextItem \
 		../../../Qt5.9.4/5.9.4/clang_64/lib/QtCore.framework/Headers/QThread \
