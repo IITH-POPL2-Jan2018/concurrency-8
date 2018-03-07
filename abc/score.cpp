@@ -8,7 +8,7 @@ score::score(QGraphicsItem *parent): QGraphicsTextItem(parent){
     // draw the text
     setPlainText(QString("\t\t\t") + QString::number(Score)); // Score: 0
     setDefaultTextColor(Qt::red);
-    setFont(QFont("times",16));
+    setFont(QFont("times",20));
 }
 
 void score::increase()
