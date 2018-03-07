@@ -38,7 +38,6 @@ myplayer1::myplayer1(int i, gamestate *state_param)
 
 void myplayer1::keyPressEvent(QKeyEvent *event)
 {
-
        if (event->key() == Qt::Key_Up)
        {
            if (pos().y() > 30){
@@ -70,7 +69,7 @@ void myplayer1::keyPressEvent(QKeyEvent *event)
                bow1->setRotation(bow1->angle);
            }
        }
-       else if ((event->key() == Qt::Key_Space)&& flag==0)
+       else if ((event->key() == Qt::Key_Space)&& flag == 0)
        {
             arrow * a = new arrow(state, t);
             state->isArrow1 = true;
@@ -89,12 +88,6 @@ void myplayer1::keyPressEvent(QKeyEvent *event)
        state->Player1Position.setX(x());
        state->Player1Position.setY(y());
        state->Bow1Angle = bow1->angle;
-       /*QJsonObject message;
-       message = state->getJsonObject();
-       QJsonDocument message_doc(message);
-       QByteArray message_byte = message_doc.toBinaryData();
-       client_local.sendBinaryMessage(message_byte);*/
-
 }
 
 void myplayer1::setClientLocal(QWebSocket * client_param)

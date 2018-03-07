@@ -42,7 +42,7 @@ void target::reset()
     QTime time = QTime::currentTime();
     qsrand((uint)time.msec());
     qDebug() << "k";
-    setPos(qrand()%100+350,qrand()%600);
+    setPos(qrand()%100+350,qrand()%540);
     qDebug() << "m";
     a = qrand()%2;
     qDebug() << "l";
@@ -56,6 +56,7 @@ void target::reset()
 void target::move()
 {
     mutex.lock();
+
     if(a == 0){
         setPos(x(),y()-10);
         if (pos().y()  <=  0){
@@ -74,5 +75,6 @@ void target::move()
     }
     state->TargetPosition.setX(pos().x());
     state->TargetPosition.setY(pos().y());
+
     mutex.unlock();
 }

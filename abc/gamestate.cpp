@@ -13,7 +13,8 @@ gamestate::gamestate(QGraphicsScene * scene)
 
 QJsonObject gamestate::getJsonObject()
 {
-    QJsonObject tmp {
+    QJsonObject tmp
+    {
 
             {"player1_posX",Player1Position.x()},
             {"player1_posY",Player1Position.y()},
@@ -40,15 +41,5 @@ QJsonObject gamestate::getJsonObject()
     return tmp;
 }
 
-/*void gamestate::StateSet(myplayer1 *p1, myplayer1 *p2, target *t)
-{
-    Player1Position.setX(p1->x());
-    Player1Position.setY(p1->y());
-    Player2Position.setX(p2->x());
-    Player2Position.setY(p2->y());
-    TargetPosition.setX(t->x());
-    TargetPosition.setY(t->y());
-
-}*/
 
 
