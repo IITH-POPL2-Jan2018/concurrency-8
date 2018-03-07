@@ -37,7 +37,7 @@ int main(int argc, char *argv[]){
     scoreboard * s2 =new scoreboard();
     myplayer1 * p1;
 
-    int x = 0;
+    int x = 1;
     if(x == 0)
     {
         state->id = 0;
