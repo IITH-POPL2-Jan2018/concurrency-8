@@ -4,7 +4,9 @@
 #include <QTime>
 #include <QDebug>
 
+#include <QMutex>
 
+extern QMutex mutex;
 
 target::target(gamestate *state_param)
 {
@@ -53,6 +55,7 @@ void target::reset()
 
 void target::move()
 {
+    mutex.lock();
     if(a == 0){
         setPos(x(),y()-10);
         if (pos().y()  <=  0){
@@ -71,4 +74,5 @@ void target::move()
     }
     state->TargetPosition.setX(pos().x());
     state->TargetPosition.setY(pos().y());
+    mutex.unlock();
 }

@@ -19,9 +19,11 @@
 #include <QTimer>
 #include "mainthread.h"
 #include <QThread>
+#include <QMutex>
 
 score * point1;
 score * point2;
+QMutex mutex;
 target * t;
 int flag;
 

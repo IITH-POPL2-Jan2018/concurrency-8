@@ -10,9 +10,11 @@
 #include "myplayer1.h"
 #include <typeinfo>
 #include <QDebug>
+#include <QMutex>
 
 extern score * point1;
 extern score * point2;
+extern QMutex mutex;
 extern int flag;
 
 arrow::arrow(gamestate *state_param, target *t_param)
@@ -75,7 +77,8 @@ void arrow::move(){
             }
         }
     */
-    qDebug() << t->x() <<t->y();
+    //qDebug() << t->x() <<t->y();
+    mutex.lock();
     if(pos().x()>=(t->x()-20) && pos().x()<=(t->x()+20) && pos().y()<(t->y()+20) && pos().y()>(t->y()-20)){
         if(state->id ==1 )
         {
@@ -105,9 +108,11 @@ void arrow::move(){
                 delete this;
                 state->isArrow1=false;
                 flag=0;
+                mutex.unlock();
                 return;
 
     }
+    mutex.unlock();
     presentAngle = qRadiansToDegrees(qAtan((75*qSin(qDegreesToRadians(-1*angle)) - 10*time)/(75*qCos(qDegreesToRadians(angle)))));
     setRotation(-1*presentAngle);
     state->Arrow1Angle = -1*presentAngle;

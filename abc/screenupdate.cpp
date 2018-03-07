@@ -1,6 +1,9 @@
 #include "screenupdate.h"
 #include <QTimer>
 #include "score.h"
+#include <QMutex>
+
+extern QMutex mutex;
 extern score * point1;
 extern score * point2;
 screenUpdate::screenUpdate(QGraphicsScene *scene_param, gamestate *state_param , myplayer1 * p2_param , int i)
@@ -40,11 +43,13 @@ void screenUpdate::Update()
         t->setPos(state->TargetPosition.x(),state->TargetPosition.y());
     }
     qDebug()<<"a";
+    mutex.lock();
     if(state->hit == 1)
     {
         qDebug()<< "c";
         t->reset();
     }
+    mutex.unlock();
     qDebug()<< "b";
     if(state->isArrow2)
     {
