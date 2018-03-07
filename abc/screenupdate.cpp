@@ -42,7 +42,7 @@ void screenUpdate::Update()
     {
         t->setPos(state->TargetPosition.x(),state->TargetPosition.y());
     }
-    qDebug()<<"a";
+    //qDebug()<<"a";
     mutex.lock();
     if(state->hit == 1)
     {
@@ -50,7 +50,7 @@ void screenUpdate::Update()
         t->reset();
     }
     mutex.unlock();
-    qDebug()<< "b";
+    //qDebug()<< "b";
     if(state->isArrow2)
     {
         p2->player2Arrow->setPos(state->Arrow2Position.x(),state->Arrow2Position.y());

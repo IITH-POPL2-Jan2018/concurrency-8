@@ -5,12 +5,12 @@
 #include <QJsonObject>
 #include <QJsonDocument>
 
-server::server(QGraphicsScene *scene_param, quint16 port_param, gamestate *state_param, target *t_param):
+server::server(QGraphicsScene *scene_param,QGraphicsView * view_param, quint16 port_param, gamestate *state_param, target *t_param):
     port(port_param)
 {
     t = t_param;
     state = state_param;
-
+    view = view_param;
     gameStarted = false;
     server_local = new QWebSocketServer(QStringLiteral("Archery Server"),QWebSocketServer::NonSecureMode,this);
 }
@@ -18,7 +18,7 @@ server::server(QGraphicsScene *scene_param, quint16 port_param, gamestate *state
 void server::startServer()
 {
 
-    if(server_local->listen(QHostAddress("192.168.116.133"),port))
+    if(server_local->listen(QHostAddress("192.168.137.4"),port))
     {
             qDebug() << "Server Started";
             qDebug() << server_local->serverUrl().toString();
@@ -52,6 +52,7 @@ void server::connectionSetup()
     {
             QWebSocket *client_Socket = server_local->nextPendingConnection();
             client_local = client_Socket;
+            view->show();
             startGame();
             QObject::connect(client_Socket, &QWebSocket::binaryMessageReceived, this, &server::processBinary,Qt::DirectConnection);
             QObject::connect(client_Socket, &QWebSocket::textMessageReceived, this, &server::processText,Qt::DirectConnection);

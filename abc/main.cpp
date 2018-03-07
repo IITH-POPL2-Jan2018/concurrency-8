@@ -77,7 +77,7 @@ int main(int argc, char *argv[]){
     QGraphicsView * view = new QGraphicsView(scene);
 
     // show the view
-    view->show();
+    //view->show();
     view->setFixedSize(800,600);
     scene->setSceneRect(0,0,800,600);
     scene->setBackgroundBrush(QBrush(QImage(":/images/bg.resized.png")));
@@ -102,7 +102,7 @@ int main(int argc, char *argv[]){
     state->Arrow1Angle =0;
     state->Bow2Angle = 180;
     state->Arrow2Angle = 180;
-    server * GameServer = new server(scene,1234,state,t);
+    server * GameServer = new server(scene,view,1234,state,t);
     GameServer->startServer();
     //client * GameClient  = new client(state);
     //GameClient->estServerConnection(QUrl("ws://ip:1234"));

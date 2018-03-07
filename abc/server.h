@@ -4,6 +4,7 @@
 #include <QWebSocket>
 #include <QObject>
 #include <QGraphicsScene>
+#include <QGraphicsView>
 #include "gamestate.h"
 #include "target.h"
 
@@ -19,6 +20,7 @@ class server: public QObject{
     bool gameStarted;
     bool loop_Running;
     QGraphicsScene * scene;
+    QGraphicsView * view;
     gamestate * state;
     void startGame();
     target *t;
@@ -32,7 +34,7 @@ class server: public QObject{
 
    public:
 
-    server(QGraphicsScene * scene_param,quint16 port_param,gamestate * state_param, target *t_param);
+    server(QGraphicsScene * scene_param,QGraphicsView * view_param,quint16 port_param,gamestate * state_param, target *t_param);
     void startServer();
     void gameLoop();
 
