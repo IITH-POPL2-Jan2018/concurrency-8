@@ -39,7 +39,7 @@ int main(int argc, char *argv[]){
     scoreboard * s2 =new scoreboard();
     myplayer1 * p1;
 
-    int x = 0;
+    int x = 1;
     if(x == 0)
     {
         state->id = 0;
@@ -151,7 +151,7 @@ int main(int argc, char *argv[]){
         state->Bow2Angle = 180;
         state->Arrow2Angle = 180;
         client * GameClient  = new client(state);
-        GameClient->estServerConnection(QUrl("ws://192.168.43.210:1234"));
+        GameClient->estServerConnection(QUrl("ws://192.168.137.4:1234"));
         screenUpdate * u = new screenUpdate(scene,state,p2,1,t);
         u->startUpdate();
     }
