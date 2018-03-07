@@ -96,9 +96,11 @@ void arrow::move(){
                 QTime time = QTime::currentTime();
                 qsrand((uint)time.msec());
                 t->setPos(qrand()%100+350,qrand()%600);*/
+            if(state->id == 0){
                 t->reset();
                 state->TargetPosition.setX(t->x());
                 state->TargetPosition.setY(t->y());
+            }
                 /*t->a = qrand()%2;
                 if(t->a == 0)
                     t->setRotation(0);

@@ -79,6 +79,8 @@ int main(int argc, char *argv[]){
     // show the view
     //view->show();
     view->setFixedSize(800,600);
+    view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     scene->setSceneRect(0,0,800,600);
     scene->setBackgroundBrush(QBrush(QImage(":/images/bg.resized.png")));
     p1->setPos(0,200);
@@ -149,6 +151,8 @@ int main(int argc, char *argv[]){
         // show the view
         view->show();
         view->setFixedSize(800,600);
+        view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         scene->setSceneRect(0,0,800,600);
         scene->setBackgroundBrush(QBrush(QImage(":/images/bg.resized.png")));
         p1->setPos(0,200);

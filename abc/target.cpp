@@ -42,7 +42,7 @@ void target::reset()
     QTime time = QTime::currentTime();
     qsrand((uint)time.msec());
     qDebug() << "k";
-    setPos(qrand()%100+350,qrand()%600);
+    setPos(qrand()%100+350,qrand()%540);
     qDebug() << "m";
     a = qrand()%2;
     qDebug() << "l";
